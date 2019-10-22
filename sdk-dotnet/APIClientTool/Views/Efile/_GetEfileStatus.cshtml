@@ -1,0 +1,168 @@
+﻿@model List<APIClientTool.ViewModels.EFileStatus>
+
+<h1 class="pageTitle">Form W-2 Returns</h1>
+
+<table class="table table-bordered">
+    <thead class="thead-inverse">
+        <tr>
+            <th>SubmissionId</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            int i = 1;
+            foreach (var item in Model.OrderBy(a => a.UpdatedTimeStamp))
+            {
+                <tr>
+                    <td>
+                        @item.SubmissionId
+                    </td>
+                    @if (item.IsReturnTransmitted)
+                    {
+                        <td style="color:green">Transmitted</td>
+                    }
+                    else
+                    {
+                        <td style="color:dodgerblue">Not Transmitted</td>
+                    }
+                    <td>
+                        @*<button type="button" class="btn btn_sm btn_second" onclick="APIValidate('@item.SubmissionId')" id="btnapival_@i" style="background:#da4b3b!important">
+                                Validate
+                                <i class="fa fa-spinner fa-spin" aria-hidden="true" id="apivalspinner_@i" style="display:none"></i>
+                            </button>*@
+
+                        <a href="/FormW2/FormW2UpdateReturn/" class="btn btn_sm btn_second" style="background:#3ff3e3!important">Update</a>
+                        <button type="button" class="btn btn_sm btn_second" onclick="ViewFormw2('@item.SubmissionId')" id="btnapival_@i" style="background:dodgerblue!important">
+                            View (GET)
+                        </button>
+                        @if (!item.IsReturnTransmitted)
+                        {
+                            <button type="button" class="btn btn_sm btn_primary" onclick="Transmit('@item.SubmissionId')" id="btnTransmit_@i">
+                                Transmit
+                                <i class="fa fa-spinner fa-spin" aria-hidden="true" id="TransmitSpinner_@i" style="display:none"></i>
+                            </button>
+                        }
+                        <button type="button" class="btn btn_sm btn_second" onclick="EfileStatus('@item.SubmissionId')" id="btnEfilestatus_@i">
+                            Get Status
+                            <i class="fa fa-spinner fa-spin" aria-hidden="true" id="statusSpinner_@i" style="display:none"></i>
+                        </button>
+                        <button type="button" class="btn btn_sm btn_second" onclick="DeleteFormw2('@item.SubmissionId')" id="btnapival_@i" style="background:#ff0000!important">
+                            Delete
+                        </button>
+                        <a href="/FormW2/GetFormW2List/" class="btn btn_sm btn_second" style="background:#e4bcf2!important">List</a>
+                    </td>
+                </tr>
+                i++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3" class="taC">No result found</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+<script type="text/javascript">
+
+    $(function () {
+
+    });
+
+    function APIValidate(id) {
+        $("#apivalspinner").show();
+        $.ajax({
+            url: "/FormW2/_APIValidate/",
+            cache: false,
+            data: { submissionId: id },
+            success: function (data) {
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+                $("#apivalspinner").hide();
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+    function Transmit(id) {
+        $("#TransmitSpinner").show();
+        $.ajax({
+            url: "/FormW2/_TransmitReturn/",
+            cache: false,
+            data: { submissionId: id },
+            success: function (data) {
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+                $("#TransmitSpinner").hide();
+                GetEfileStatus();
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+    function EfileStatus(id) {
+        $("#statusSpinner").show();
+        $.ajax({
+            url: "/FormW2/_GetEfileStatusResponse/",
+            cache: false,
+            data: { submissionId: id },
+            success: function (data) {
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+                $("#statusSpinner").hide();
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+    function DeleteFormw2(id) {
+        $("#TransmitSpinner").show();
+        $.ajax({
+            url: "/FormW2/Delete/",
+            cache: false,
+            data: { submissionId: id },
+            success: function (data) {
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+                $("#TransmitSpinner").hide();
+                GetEfileStatus();
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+    function ViewFormw2(id) {
+        $.ajax({
+            url: "/FormW2/GetFormW2/",
+            cache: false,
+            data: { submissionId: id },
+            success: function (data) {
+                debugger;
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+</script>

@@ -1,0 +1,146 @@
+﻿@model List<APIClientTool.ViewModels.EFileStatus>
+
+<h1 class="pageTitle">Form 941 Returns</h1>
+
+<table class="table table-bordered">
+    <thead class="thead-inverse">
+        <tr>
+            <th>SubmissionId</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            int i = 1;
+            foreach (var item in Model.OrderBy(a => a.UpdatedTimeStamp))
+            {
+                <tr>
+                    <td>
+                        @item.SubmissionId
+                    </td>
+                    @if (item.IsReturnTransmitted)
+                    {
+                        <td style="color:green">Transmitted</td>
+                    }
+                    else
+                    {
+                        <td style="color:dodgerblue">Not Transmitted</td>
+                    }
+                    <td>
+                        @*<button type="button" class="btn btn_sm btn_second" onclick="APIValidate('@item.SubmissionId')" id="btnapival_@i" style="background:#da4b3b!important">
+                            Validate
+                            <i class="fa fa-spinner fa-spin" aria-hidden="true" id="apivalspinner_@i" style="display:none"></i>
+                        </button>*@
+                        <button type="button" class="btn btn_sm btn_second" onclick="ViewForm941('@item.SubmissionId')" id="btnapival_@i" style="background:dodgerblue!important">
+                            View (GET)
+                        </button>
+                        @if (!item.IsReturnTransmitted)
+                        {
+                            <button type="button" class="btn btn_sm btn_primary" onclick="Form941Transmit('@item.SubmissionId')" id="btnTransmit_@i">
+                                Transmit
+                                <i class="fa fa-spinner fa-spin" aria-hidden="true" id="Form941TransmitSpinner_@i" style="display:none"></i>
+                            </button>
+                        }
+                        <button type="button" class="btn btn_sm btn_second" onclick="Form941EfileStatus('@item.SubmissionId')" id="btnEfilestatus_@i">
+                            Get Status
+                            <i class="fa fa-spinner fa-spin" aria-hidden="true" id="Form941statusSpinner_@i" style="display:none"></i>
+                        </button>
+                        <button type="button" class="btn btn_sm btn_second" onclick="DeleteForm941('@item.SubmissionId')" id="btnapival_@i" style="background:#ff0000!important">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                i++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3" class="taC">No result found</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<script type="text/javascript">
+
+    $(function () {
+
+    });
+
+    function Form941Transmit(id) {
+        $("#Form941TransmitSpinner").show();
+        $.ajax({
+            url: "/Form941/_TransmitReturn/",
+            cache: false,
+            data: { submissionId: id },
+            success: function (data) {
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+                $("#TransmitSpinner").hide();
+                GetForm941EfileStatus();
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+    function Form941EfileStatus(id) {
+        $("#Form941statusSpinner").show();
+        $.ajax({
+            url: "/Form941/_GetEfileStatusResponse/",
+            cache: false,
+            data: { submissionId: id },
+            success: function (data) {
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+                $("#statusSpinner").hide();
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+    function ViewForm941(id) {
+        $.ajax({
+            url: "/Form941/GetForm941/",
+            cache: false,
+            data: { submissionId: id },
+            success: function (data) {
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+                $("#TransmitSpinner").hide();
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+    function DeleteForm941(id) {
+        $.ajax({
+            url: "/Form941/Delete/",
+            cache: false,
+            data: { submissionId: id },
+            success: function (data) {
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+                $("#TransmitSpinner").hide();
+                GetForm941EfileStatus();
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+</script>

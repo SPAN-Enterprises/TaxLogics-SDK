@@ -1,0 +1,768 @@
+﻿@model APIClientTool.ViewModels.FormW2UpdateRequest
+@{
+    ViewBag.Title = "FormW2 Return - Update";
+
+    List<SelectListItem> _Line12CodeList = new List<SelectListItem>();
+    _Line12CodeList.Add(new SelectListItem { Text = "A", Value = "A" });
+    _Line12CodeList.Add(new SelectListItem { Text = "B", Value = "B" });
+    _Line12CodeList.Add(new SelectListItem { Text = "C", Value = "C" });
+    _Line12CodeList.Add(new SelectListItem { Text = "D", Value = "D" });
+    _Line12CodeList.Add(new SelectListItem { Text = "E", Value = "E" });
+    _Line12CodeList.Add(new SelectListItem { Text = "F", Value = "F" });
+    _Line12CodeList.Add(new SelectListItem { Text = "G", Value = "G" });
+    _Line12CodeList.Add(new SelectListItem { Text = "H", Value = "H" });
+    _Line12CodeList.Add(new SelectListItem { Text = "J", Value = "J" });
+    _Line12CodeList.Add(new SelectListItem { Text = "K", Value = "K" });
+    _Line12CodeList.Add(new SelectListItem { Text = "L", Value = "L" });
+    _Line12CodeList.Add(new SelectListItem { Text = "M", Value = "M" });
+    _Line12CodeList.Add(new SelectListItem { Text = "N", Value = "N" });
+    _Line12CodeList.Add(new SelectListItem { Text = "P", Value = "P" });
+    _Line12CodeList.Add(new SelectListItem { Text = "Q", Value = "Q" });
+    _Line12CodeList.Add(new SelectListItem { Text = "R", Value = "R" });
+    _Line12CodeList.Add(new SelectListItem { Text = "S", Value = "S" });
+    _Line12CodeList.Add(new SelectListItem { Text = "T", Value = "T" });
+    _Line12CodeList.Add(new SelectListItem { Text = "V", Value = "V" });
+    _Line12CodeList.Add(new SelectListItem { Text = "W", Value = "W" });
+    _Line12CodeList.Add(new SelectListItem { Text = "Y", Value = "Y" });
+    _Line12CodeList.Add(new SelectListItem { Text = "Z", Value = "Z" });
+    _Line12CodeList.Add(new SelectListItem { Text = "AA", Value = "AA" });
+    _Line12CodeList.Add(new SelectListItem { Text = "BB", Value = "BB" });
+    _Line12CodeList.Add(new SelectListItem { Text = "CC", Value = "CC" });
+    _Line12CodeList.Add(new SelectListItem { Text = "DD", Value = "DD" });
+    _Line12CodeList.Add(new SelectListItem { Text = "EE", Value = "EE" });
+    _Line12CodeList.Add(new SelectListItem { Text = "FF", Value = "FF" });
+
+    List<SelectListItem> _USStates = new List<SelectListItem>();
+    _USStates.Add(new SelectListItem { Text = "Alabama (AL)", Value = "AL" });
+    _USStates.Add(new SelectListItem { Text = "Alaska (AK)", Value = "AK" });
+    _USStates.Add(new SelectListItem { Text = "Arizona (AZ)", Value = "AZ" });
+    _USStates.Add(new SelectListItem { Text = "Arkansas (AR)", Value = "AR" });
+    _USStates.Add(new SelectListItem { Text = "California (CA)", Value = "CA" });
+    _USStates.Add(new SelectListItem { Text = "Colorado (CO)", Value = "CO" });
+    _USStates.Add(new SelectListItem { Text = "Connecticut (CT)", Value = "CT" });
+    _USStates.Add(new SelectListItem { Text = "Delaware (DE)", Value = "DE" });
+    _USStates.Add(new SelectListItem { Text = "District of Columbia (DC)", Value = "DC" });
+    _USStates.Add(new SelectListItem { Text = "Florida (FL)", Value = "FL" });
+    _USStates.Add(new SelectListItem { Text = "Georgia (GA)", Value = "GA" });
+    _USStates.Add(new SelectListItem { Text = "Hawaii (HI)", Value = "HI" });
+    _USStates.Add(new SelectListItem { Text = "Idaho (ID)", Value = "ID" });
+    _USStates.Add(new SelectListItem { Text = "Illinois (IL)", Value = "IL" });
+    _USStates.Add(new SelectListItem { Text = "Indiana (IN)", Value = "IN" });
+    _USStates.Add(new SelectListItem { Text = "Iowa (IA)", Value = "IA" });
+    _USStates.Add(new SelectListItem { Text = "Kansas (KS)", Value = "KS" });
+    _USStates.Add(new SelectListItem { Text = "Kentucky (KY)", Value = "KY" });
+    _USStates.Add(new SelectListItem { Text = "Louisiana (LA)", Value = "LA" });
+    _USStates.Add(new SelectListItem { Text = "Maine (ME)", Value = "ME" });
+    _USStates.Add(new SelectListItem { Text = "Maryland (MD)", Value = "MD" });
+    _USStates.Add(new SelectListItem { Text = "Massachusetts (MA)", Value = "MA" });
+    _USStates.Add(new SelectListItem { Text = "Michigan (MI)", Value = "MI" });
+    _USStates.Add(new SelectListItem { Text = "Minnesota (MN)", Value = "MN" });
+    _USStates.Add(new SelectListItem { Text = "Mississippi (MS)", Value = "MS" });
+    _USStates.Add(new SelectListItem { Text = "Missouri (MO)", Value = "MO" });
+    _USStates.Add(new SelectListItem { Text = "Montana (MT)", Value = "MT" });
+    _USStates.Add(new SelectListItem { Text = "Nebraska (NE)", Value = "NE" });
+    _USStates.Add(new SelectListItem { Text = "Nevada (NV)", Value = "NV" });
+    _USStates.Add(new SelectListItem { Text = "New Hampshire (NH)", Value = "NH" });
+    _USStates.Add(new SelectListItem { Text = "New Jersey (NJ)", Value = "NJ" });
+    _USStates.Add(new SelectListItem { Text = "New Mexico (NM)", Value = "NM" });
+    _USStates.Add(new SelectListItem { Text = "New York (NY)", Value = "NY" });
+    _USStates.Add(new SelectListItem { Text = "North Carolina (NC)", Value = "NC" });
+    _USStates.Add(new SelectListItem { Text = "North Dakota (ND)", Value = "ND" });
+    _USStates.Add(new SelectListItem { Text = "Ohio (OH)", Value = "OH" });
+    _USStates.Add(new SelectListItem { Text = "Oklahoma (OK)", Value = "OK" });
+    _USStates.Add(new SelectListItem { Text = "Oregon (OR)", Value = "OR" });
+    _USStates.Add(new SelectListItem { Text = "Pennsylvania (PA)", Value = "PA" });
+    _USStates.Add(new SelectListItem { Text = "Rhode Island (RI)", Value = "RI" });
+    _USStates.Add(new SelectListItem { Text = "South Carolina (SC)", Value = "SC" });
+    _USStates.Add(new SelectListItem { Text = "South Dakota (SD)", Value = "SD" });
+    _USStates.Add(new SelectListItem { Text = "Tennessee (TN)", Value = "TN" });
+    _USStates.Add(new SelectListItem { Text = "Texas (TX)", Value = "TX" });
+    _USStates.Add(new SelectListItem { Text = "Utah (UT)", Value = "UT" });
+    _USStates.Add(new SelectListItem { Text = "Vermont (VT)", Value = "VT" });
+    _USStates.Add(new SelectListItem { Text = "Virginia (VA)", Value = "VA" });
+    _USStates.Add(new SelectListItem { Text = "Washington (WA)", Value = "WA" });
+    _USStates.Add(new SelectListItem { Text = "West Virginia (WV)", Value = "WV" });
+    _USStates.Add(new SelectListItem { Text = "Wisconsin (WI)", Value = "WI" });
+    _USStates.Add(new SelectListItem { Text = "Wyoming (WY)", Value = "WY" });
+    _USStates.Add(new SelectListItem { Text = "American Samoa (AS)", Value = "AS" });
+    _USStates.Add(new SelectListItem { Text = "Federated States of Micronesia (FM)", Value = "FM" });
+    _USStates.Add(new SelectListItem { Text = "Guam (GU)", Value = "GU" });
+    _USStates.Add(new SelectListItem { Text = "Marshall Islands (MH)", Value = "MH" });
+    _USStates.Add(new SelectListItem { Text = "Northern Mariana Islands (MP)", Value = "MP" });
+    _USStates.Add(new SelectListItem { Text = "Palau (PW)", Value = "PW" });
+    _USStates.Add(new SelectListItem { Text = "Puerto Rico (PR)", Value = "PR" });
+    _USStates.Add(new SelectListItem { Text = "Virgin Islands (VI)", Value = "VI" });
+    _USStates.Add(new SelectListItem { Text = "Armed Forces Americas (AA)", Value = "AA" });
+    _USStates.Add(new SelectListItem { Text = "Armed Forces Europe (AE)", Value = "AE" });
+    _USStates.Add(new SelectListItem { Text = "Armed Forces Pacific (AP)", Value = "AP" });
+
+    List<SelectListItem> _businessTypeList = new List<SelectListItem>();
+    _businessTypeList.Add(new SelectListItem { Text = "Estate", Value = "ESTE" });
+    _businessTypeList.Add(new SelectListItem { Text = "Partnership", Value = "PART" });
+    _businessTypeList.Add(new SelectListItem { Text = "Corporation", Value = "CORP" });
+    _businessTypeList.Add(new SelectListItem { Text = "Exempt Organization", Value = "EORG" });
+    _businessTypeList.Add(new SelectListItem { Text = "Sole Proprietorship", Value = "SPRO" });
+
+    List<SelectListItem> _kindOfEmployer = new List<SelectListItem>();
+    _kindOfEmployer.Add(new SelectListItem { Text = "FederalGovt", Value = "FEDERALGOVT" });
+    _kindOfEmployer.Add(new SelectListItem { Text = "StateOrLocal501c", Value = "STATEORLOCAL501C" });
+    _kindOfEmployer.Add(new SelectListItem { Text = "501cnongovt", Value = "NONGOVT501C" });
+    _kindOfEmployer.Add(new SelectListItem { Text = "StateOrLocalnon501c", Value = "STATEORLOCALNON501C" });
+    _kindOfEmployer.Add(new SelectListItem { Text = "Noneapply", Value = "NONEAPPLY" });
+
+    List<SelectListItem> _employmentCd = new List<SelectListItem>();
+    _employmentCd.Add(new SelectListItem { Text = "Regular(941)", Value = "REGULAR941" });
+    _employmentCd.Add(new SelectListItem { Text = "Regular(944)", Value = "REGULAR944" });
+    _employmentCd.Add(new SelectListItem { Text = "Agricultural(943)", Value = "AGRICULTURAL943" });
+    _employmentCd.Add(new SelectListItem { Text = "Household", Value = "HOUSEHOLD" });
+    _employmentCd.Add(new SelectListItem { Text = "Military", Value = "MILITARY" });
+    _employmentCd.Add(new SelectListItem { Text = "MedicareQualGovEm", Value = "MEDICAREQUALGOVEM" });
+    _employmentCd.Add(new SelectListItem { Text = "Railroad(CT-1)", Value = "RAILROADFORMCT1" });
+
+    List<SelectListItem> _countryList = new List<SelectListItem>();
+    _countryList.Add(new SelectListItem { Text = "Afghanistan", Value = "AF" });
+    _countryList.Add(new SelectListItem { Text = "Akrotiri", Value = "AX" });
+    _countryList.Add(new SelectListItem { Text = "Aland Island", Value = "XI" });
+    _countryList.Add(new SelectListItem { Text = "Albania", Value = "AL" });
+    _countryList.Add(new SelectListItem { Text = "Algeria", Value = "AG" });
+    _countryList.Add(new SelectListItem { Text = "American Samoa", Value = "AQ" });
+    _countryList.Add(new SelectListItem { Text = "Andorra", Value = "AN" });
+    _countryList.Add(new SelectListItem { Text = "Angola ", Value = "AO" });
+    _countryList.Add(new SelectListItem { Text = "Anguilla", Value = "AV" });
+    _countryList.Add(new SelectListItem { Text = "Antarctica ", Value = "AY" });
+    _countryList.Add(new SelectListItem { Text = "Antigua and Barbuda", Value = "AC" });
+    _countryList.Add(new SelectListItem { Text = "Argentina", Value = "AR" });
+    _countryList.Add(new SelectListItem { Text = "Armenia", Value = "AM" });
+    _countryList.Add(new SelectListItem { Text = "Aruba", Value = "AA" });
+    _countryList.Add(new SelectListItem { Text = "Ascension", Value = "XA" });
+    _countryList.Add(new SelectListItem { Text = "Ashmore and Cartier Islands", Value = "AT" });
+    _countryList.Add(new SelectListItem { Text = "Australia", Value = "AS" });
+    _countryList.Add(new SelectListItem { Text = "Austria", Value = "AU" });
+    _countryList.Add(new SelectListItem { Text = "Azerbaijan ", Value = "AJ" });
+    _countryList.Add(new SelectListItem { Text = "Azores ", Value = "XZ" });
+    _countryList.Add(new SelectListItem { Text = "Bahamas", Value = "BF" });
+    _countryList.Add(new SelectListItem { Text = "Bahrain", Value = "BA" });
+    _countryList.Add(new SelectListItem { Text = "Baker Islands", Value = "FQ" });
+    _countryList.Add(new SelectListItem { Text = "Bangladesh ", Value = "BG" });
+    _countryList.Add(new SelectListItem { Text = "Barbados", Value = "BB" });
+    _countryList.Add(new SelectListItem { Text = "Bassas da India", Value = "BS" });
+    _countryList.Add(new SelectListItem { Text = "Belarus", Value = "BO" });
+    _countryList.Add(new SelectListItem { Text = "Belgium", Value = "BE" });
+    _countryList.Add(new SelectListItem { Text = "Belize ", Value = "BH" });
+    _countryList.Add(new SelectListItem { Text = "Benin", Value = "BN" });
+    _countryList.Add(new SelectListItem { Text = "Bermuda", Value = "BD" });
+    _countryList.Add(new SelectListItem { Text = "Bhutan ", Value = "BT" });
+    _countryList.Add(new SelectListItem { Text = "Bolivia", Value = "BL" });
+    _countryList.Add(new SelectListItem { Text = "Bosnia - Herzegovina ", Value = "BK" });
+    _countryList.Add(new SelectListItem { Text = "Botswana", Value = "BC" });
+    _countryList.Add(new SelectListItem { Text = "Bouvet Island", Value = "BV" });
+    _countryList.Add(new SelectListItem { Text = "Brazil ", Value = "BR" });
+    _countryList.Add(new SelectListItem { Text = "British Indian OceanTerritory", Value = "IO" });
+    _countryList.Add(new SelectListItem { Text = "British Virgin Islands", Value = "VI" });
+    _countryList.Add(new SelectListItem { Text = "Brunei ", Value = "BX" });
+    _countryList.Add(new SelectListItem { Text = "Bulgaria", Value = "BU" });
+    _countryList.Add(new SelectListItem { Text = "Burkina Faso", Value = "UV" });
+    _countryList.Add(new SelectListItem { Text = "Burma", Value = "BM" });
+    _countryList.Add(new SelectListItem { Text = "Burundi", Value = "BY" });
+    _countryList.Add(new SelectListItem { Text = "Cambodia", Value = "CB" });
+    _countryList.Add(new SelectListItem { Text = "Cameroon", Value = "CM" });
+    _countryList.Add(new SelectListItem { Text = "Canada ", Value = "CA" });
+    _countryList.Add(new SelectListItem { Text = "Canary Islands", Value = "XY" });
+    _countryList.Add(new SelectListItem { Text = "Cape Verde ", Value = "CV" });
+    _countryList.Add(new SelectListItem { Text = "Cayman Islands", Value = "CJ" });
+    _countryList.Add(new SelectListItem { Text = "Central African Republic ", Value = "CT" });
+    _countryList.Add(new SelectListItem { Text = "Chad", Value = "CD" });
+    _countryList.Add(new SelectListItem { Text = "Channel Islands", Value = "XC" });
+    _countryList.Add(new SelectListItem { Text = "Chile", Value = "CI" });
+    _countryList.Add(new SelectListItem { Text = "China", Value = "CH" });
+    _countryList.Add(new SelectListItem { Text = "Christmas Island ", Value = "KT" });
+    _countryList.Add(new SelectListItem { Text = "Clipperton Island", Value = "IP" });
+    _countryList.Add(new SelectListItem { Text = "Cocos(Keeling) Islands", Value = "CK" });
+    _countryList.Add(new SelectListItem { Text = "Colombia", Value = "CO" });
+    _countryList.Add(new SelectListItem { Text = "Comoros", Value = "CN" });
+    _countryList.Add(new SelectListItem { Text = "Congo(Brazzaville)", Value = "CF" });
+    _countryList.Add(new SelectListItem { Text = "Congo(Kinshasa)", Value = "CG" });
+    _countryList.Add(new SelectListItem { Text = "Cook Islands", Value = "CW" });
+    _countryList.Add(new SelectListItem { Text = "Coral Sea Islands", Value = "CR" });
+    _countryList.Add(new SelectListItem { Text = "Corsica", Value = "VP" });
+    _countryList.Add(new SelectListItem { Text = "Costa Rica ", Value = "CS" });
+    _countryList.Add(new SelectListItem { Text = "Cote D'Ivoire (IvoryCoast)", Value = "IV" });
+    _countryList.Add(new SelectListItem { Text = "Croatia", Value = "HR" });
+    _countryList.Add(new SelectListItem { Text = "Cuba", Value = "CU" });
+    _countryList.Add(new SelectListItem { Text = "Cyprus ", Value = "CY" });
+    _countryList.Add(new SelectListItem { Text = "Czech Republic", Value = "EZ" });
+    _countryList.Add(new SelectListItem { Text = "Denmark", Value = "DA" });
+    _countryList.Add(new SelectListItem { Text = "Dhekelia", Value = "DX" });
+    _countryList.Add(new SelectListItem { Text = "Djibouti", Value = "DJ" });
+    _countryList.Add(new SelectListItem { Text = "Dominica", Value = "DO" });
+    _countryList.Add(new SelectListItem { Text = "Dominican Republic", Value = "DR" });
+    _countryList.Add(new SelectListItem { Text = "East Timor ", Value = "TT" });
+    _countryList.Add(new SelectListItem { Text = "Ecuador", Value = "EC" });
+    _countryList.Add(new SelectListItem { Text = "Egypt", Value = "EG" });
+    _countryList.Add(new SelectListItem { Text = "El Salvador", Value = "ES" });
+    _countryList.Add(new SelectListItem { Text = "England", Value = "UK" });
+    _countryList.Add(new SelectListItem { Text = "Equatorial Guinea", Value = "EK" });
+    _countryList.Add(new SelectListItem { Text = "Eritrea", Value = "ER" });
+    _countryList.Add(new SelectListItem { Text = "Estonia", Value = "EN" });
+    _countryList.Add(new SelectListItem { Text = "Ethiopia", Value = "ET" });
+    _countryList.Add(new SelectListItem { Text = "Europa Island", Value = "EU" });
+    _countryList.Add(new SelectListItem { Text = "Falkland Islands(Islas Malvinas) ", Value = "FK" });
+    _countryList.Add(new SelectListItem { Text = "Faroe Islands", Value = "FO" });
+    _countryList.Add(new SelectListItem { Text = "Federated States of Micronesia", Value = "FM" });
+    _countryList.Add(new SelectListItem { Text = "Fiji", Value = "FJ" });
+    _countryList.Add(new SelectListItem { Text = "Finland", Value = "FI" });
+    _countryList.Add(new SelectListItem { Text = "France ", Value = "FR" });
+    _countryList.Add(new SelectListItem { Text = "French Guiana", Value = "FG" });
+    _countryList.Add(new SelectListItem { Text = "French Polynesia ", Value = "FP" });
+    _countryList.Add(new SelectListItem { Text = "French Southern and Antarctic Lands", Value = "FS" });
+    _countryList.Add(new SelectListItem { Text = "Gabon", Value = "GB" });
+    _countryList.Add(new SelectListItem { Text = "The Gambia ", Value = "GA" });
+    _countryList.Add(new SelectListItem { Text = "Gaza Strip ", Value = "GZ" });
+    _countryList.Add(new SelectListItem { Text = "Georgia", Value = "GG" });
+    _countryList.Add(new SelectListItem { Text = "Germany", Value = "GM" });
+    _countryList.Add(new SelectListItem { Text = "Ghana", Value = "GH" });
+    _countryList.Add(new SelectListItem { Text = "Gibraltar", Value = "GI" });
+    _countryList.Add(new SelectListItem { Text = "Glorioso Islands ", Value = "GO" });
+    _countryList.Add(new SelectListItem { Text = "Greece ", Value = "GR" });
+    _countryList.Add(new SelectListItem { Text = "Greenland", Value = "GL" });
+    _countryList.Add(new SelectListItem { Text = "Grenada", Value = "GJ" });
+    _countryList.Add(new SelectListItem { Text = "Grenadines ", Value = "VC" });
+    _countryList.Add(new SelectListItem { Text = "Guadeloupe ", Value = "GP" });
+    _countryList.Add(new SelectListItem { Text = "Guam", Value = "GQ" });
+    _countryList.Add(new SelectListItem { Text = "Guatemala", Value = "GT" });
+    _countryList.Add(new SelectListItem { Text = "Guernsey", Value = "GK" });
+    _countryList.Add(new SelectListItem { Text = "Guinea ", Value = "GV" });
+    _countryList.Add(new SelectListItem { Text = "Guinea - Bissau", Value = "PU" });
+    _countryList.Add(new SelectListItem { Text = "Guyana ", Value = "GY" });
+    _countryList.Add(new SelectListItem { Text = "Haiti", Value = "HA" });
+    _countryList.Add(new SelectListItem { Text = "Heard Island and McDonald Islands", Value = "HM" });
+    _countryList.Add(new SelectListItem { Text = "Honduras", Value = "HO" });
+    _countryList.Add(new SelectListItem { Text = "Hong Kong", Value = "HK" });
+    _countryList.Add(new SelectListItem { Text = "Howland Island", Value = "HQ" });
+    _countryList.Add(new SelectListItem { Text = "Hungary", Value = "HU" });
+    _countryList.Add(new SelectListItem { Text = "Iceland", Value = "IC" });
+    _countryList.Add(new SelectListItem { Text = "India", Value = "IN" });
+    _countryList.Add(new SelectListItem { Text = "Indonesia", Value = "ID" });
+    _countryList.Add(new SelectListItem { Text = "Iran", Value = "IR" });
+    _countryList.Add(new SelectListItem { Text = "Iraq", Value = "IZ" });
+    _countryList.Add(new SelectListItem { Text = "Ireland", Value = "EI" });
+    _countryList.Add(new SelectListItem { Text = "Israel ", Value = "IS" });
+    _countryList.Add(new SelectListItem { Text = "Italy", Value = "IT" });
+    _countryList.Add(new SelectListItem { Text = "Jamaica", Value = "JM" });
+    _countryList.Add(new SelectListItem { Text = "Jan Mayen", Value = "JN" });
+    _countryList.Add(new SelectListItem { Text = "Japan", Value = "JA" });
+    _countryList.Add(new SelectListItem { Text = "Jarvis Island", Value = "DQ" });
+    _countryList.Add(new SelectListItem { Text = "Jersey ", Value = "JE" });
+    _countryList.Add(new SelectListItem { Text = "Johnston Atoll", Value = "JQ" });
+    _countryList.Add(new SelectListItem { Text = "Jordan ", Value = "JO" });
+    _countryList.Add(new SelectListItem { Text = "Juan de Nova Island", Value = "JU" });
+    _countryList.Add(new SelectListItem { Text = "Kazakhstan ", Value = "KZ" });
+    _countryList.Add(new SelectListItem { Text = "Kenya", Value = "KE" });
+    _countryList.Add(new SelectListItem { Text = "Kingman Reef", Value = "KQ" });
+    _countryList.Add(new SelectListItem { Text = "Kiribati", Value = "KR" });
+    _countryList.Add(new SelectListItem { Text = "Korea, Democratic People's Republic of (North)", Value = "KN" });
+    _countryList.Add(new SelectListItem { Text = "Korea, Republic of (South)", Value = "KS" });
+    _countryList.Add(new SelectListItem { Text = "Kuwait ", Value = "KU" });
+    _countryList.Add(new SelectListItem { Text = "Kyrgyzstan ", Value = "KG" });
+    _countryList.Add(new SelectListItem { Text = "Laos", Value = "LA" });
+    _countryList.Add(new SelectListItem { Text = "Latvia ", Value = "LG" });
+    _countryList.Add(new SelectListItem { Text = "Lebanon", Value = "LE" });
+    _countryList.Add(new SelectListItem { Text = "Lesotho", Value = "LT" });
+    _countryList.Add(new SelectListItem { Text = "Liberia", Value = "LI" });
+    _countryList.Add(new SelectListItem { Text = "Libya", Value = "LY" });
+    _countryList.Add(new SelectListItem { Text = "Liechtenstein", Value = "LS" });
+    _countryList.Add(new SelectListItem { Text = "Lithuania", Value = "LH" });
+    _countryList.Add(new SelectListItem { Text = "Luxembourg ", Value = "LU" });
+    _countryList.Add(new SelectListItem { Text = "Macau", Value = "MC" });
+    _countryList.Add(new SelectListItem { Text = "Macedonia", Value = "MK" });
+    _countryList.Add(new SelectListItem { Text = "Madagascar ", Value = "MA" });
+    _countryList.Add(new SelectListItem { Text = "Malawi ", Value = "MI" });
+    _countryList.Add(new SelectListItem { Text = "Malaysia", Value = "MY" });
+    _countryList.Add(new SelectListItem { Text = "Maldives", Value = "MV" });
+    _countryList.Add(new SelectListItem { Text = "Mali", Value = "ML" });
+    _countryList.Add(new SelectListItem { Text = "Malta", Value = "MT" });
+    _countryList.Add(new SelectListItem { Text = "Man, Isle of", Value = "IM" });
+    _countryList.Add(new SelectListItem { Text = "Marshall Islands ", Value = "RM" });
+    _countryList.Add(new SelectListItem { Text = "Martinique ", Value = "MB" });
+    _countryList.Add(new SelectListItem { Text = "Mauritania ", Value = "MR" });
+    _countryList.Add(new SelectListItem { Text = "Mauritius", Value = "MP" });
+    _countryList.Add(new SelectListItem { Text = "Mayotte", Value = "MF" });
+    _countryList.Add(new SelectListItem { Text = "Mexico ", Value = "MX" });
+    _countryList.Add(new SelectListItem { Text = "Midway Islands", Value = "MQ" });
+    _countryList.Add(new SelectListItem { Text = "Moldova", Value = "MD" });
+    _countryList.Add(new SelectListItem { Text = "Monaco ", Value = "MN" });
+    _countryList.Add(new SelectListItem { Text = "Mongolia", Value = "MG" });
+    _countryList.Add(new SelectListItem { Text = "Montenegro ", Value = "MJ" });
+    _countryList.Add(new SelectListItem { Text = "Montserrat ", Value = "MH" });
+    _countryList.Add(new SelectListItem { Text = "Morocco", Value = "MO" });
+    _countryList.Add(new SelectListItem { Text = "Mozambique ", Value = "MZ" });
+    _countryList.Add(new SelectListItem { Text = "Myanmar", Value = "XM" });
+    _countryList.Add(new SelectListItem { Text = "Namibia", Value = "WA" });
+    _countryList.Add(new SelectListItem { Text = "Nauru", Value = "NR" });
+    _countryList.Add(new SelectListItem { Text = "Navassa Island", Value = "BQ" });
+    _countryList.Add(new SelectListItem { Text = "Nepal", Value = "NP" });
+    _countryList.Add(new SelectListItem { Text = "Netherlands", Value = "NL" });
+    _countryList.Add(new SelectListItem { Text = "Netherlands Antilles ", Value = "NT" });
+    _countryList.Add(new SelectListItem { Text = "New Caledonia", Value = "NC" });
+    _countryList.Add(new SelectListItem { Text = "New Zealand", Value = "NZ" });
+    _countryList.Add(new SelectListItem { Text = "Nicaragua", Value = "NU" });
+    _countryList.Add(new SelectListItem { Text = "Niger", Value = "NG" });
+    _countryList.Add(new SelectListItem { Text = "Nigeria", Value = "NI" });
+    _countryList.Add(new SelectListItem { Text = "Niue", Value = "NE" });
+    _countryList.Add(new SelectListItem { Text = "Norfolk Island", Value = "NF" });
+    _countryList.Add(new SelectListItem { Text = "Northern Ireland ", Value = "XN" });
+    _countryList.Add(new SelectListItem { Text = "Northern Mariana Islands ", Value = "CQ" });
+    _countryList.Add(new SelectListItem { Text = "Norway ", Value = "NO" });
+    _countryList.Add(new SelectListItem { Text = "Oman", Value = "MU" });
+    _countryList.Add(new SelectListItem { Text = "Other Country (country not identified elsewhere)", Value = "OC" });
+    _countryList.Add(new SelectListItem { Text = "Pakistan", Value = "PK" });
+    _countryList.Add(new SelectListItem { Text = "Palmyra Atoll", Value = "LQ" });
+    _countryList.Add(new SelectListItem { Text = "Palau", Value = "PS" });
+    _countryList.Add(new SelectListItem { Text = "Panama ", Value = "PM" });
+    _countryList.Add(new SelectListItem { Text = "Papua - New Guinea", Value = "PP" });
+    _countryList.Add(new SelectListItem { Text = "Paracel Islands ", Value = "PF" });
+    _countryList.Add(new SelectListItem { Text = "Paraguay", Value = "PA" });
+    _countryList.Add(new SelectListItem { Text = "Peru ", Value = "PE" });
+    _countryList.Add(new SelectListItem { Text = "Philippines", Value = "RP" });
+    _countryList.Add(new SelectListItem { Text = "Pitcairn Islands", Value = "PC" });
+    _countryList.Add(new SelectListItem { Text = "Poland", Value = "PL" });
+    _countryList.Add(new SelectListItem { Text = "Portugal", Value = "PO" });
+    _countryList.Add(new SelectListItem { Text = "Puerto Rico", Value = "RQ" });
+    _countryList.Add(new SelectListItem { Text = "Qatar", Value = "QA" });
+    _countryList.Add(new SelectListItem { Text = "Reunion ", Value = "RE" });
+    _countryList.Add(new SelectListItem { Text = "Romania ", Value = "RO" });
+    _countryList.Add(new SelectListItem { Text = "Russia", Value = "RS" });
+    _countryList.Add(new SelectListItem { Text = "Rwanda", Value = "RW" });
+    _countryList.Add(new SelectListItem { Text = "Samoa and Western Samoa ", Value = "WS" });
+    _countryList.Add(new SelectListItem { Text = "San Marino ", Value = "SM" });
+    _countryList.Add(new SelectListItem { Text = "Sao Tome and Principe", Value = "TP" });
+    _countryList.Add(new SelectListItem { Text = "Saudi Arabia", Value = "SA" });
+    _countryList.Add(new SelectListItem { Text = "Scotland", Value = "XS" });
+    _countryList.Add(new SelectListItem { Text = "Senegal ", Value = "SG" });
+    _countryList.Add(new SelectListItem { Text = "Serbia", Value = "RI" });
+    _countryList.Add(new SelectListItem { Text = "Seychelles ", Value = "SE" });
+    _countryList.Add(new SelectListItem { Text = "Sierra Leone", Value = "SL" });
+    _countryList.Add(new SelectListItem { Text = "Singapore", Value = "SN" });
+    _countryList.Add(new SelectListItem { Text = "Slovak Republic", Value = "XR" });
+    _countryList.Add(new SelectListItem { Text = "Slovakia", Value = "LO" });
+    _countryList.Add(new SelectListItem { Text = "Slovenia", Value = "SI" });
+    _countryList.Add(new SelectListItem { Text = "Solomon Islands", Value = "BP" });
+    _countryList.Add(new SelectListItem { Text = "Somalia ", Value = "SO" });
+    _countryList.Add(new SelectListItem { Text = "South Africa", Value = "SF" });
+    _countryList.Add(new SelectListItem { Text = "South Georgia and the South Sandwich Islands ", Value = "SX" });
+    _countryList.Add(new SelectListItem { Text = "Spain", Value = "SP" });
+    _countryList.Add(new SelectListItem { Text = "Spratly Islands", Value = "PG" });
+    _countryList.Add(new SelectListItem { Text = "Sri Lanka", Value = "CE" });
+    _countryList.Add(new SelectListItem { Text = "St.Helena", Value = "SH" });
+    _countryList.Add(new SelectListItem { Text = "St.Kitts and Nevis", Value = "SC" });
+    _countryList.Add(new SelectListItem { Text = "St.Lucia Island", Value = "ST" });
+    _countryList.Add(new SelectListItem { Text = "St.Pierre and Miquelon", Value = "SB" });
+    _countryList.Add(new SelectListItem { Text = "St.Vincent and the Grenadines ", Value = "VC" });
+    _countryList.Add(new SelectListItem { Text = "Sudan", Value = "SU" });
+    _countryList.Add(new SelectListItem { Text = "Suriname", Value = "NS" });
+    _countryList.Add(new SelectListItem { Text = "Svalbard", Value = "SV" });
+    _countryList.Add(new SelectListItem { Text = "Swaziland", Value = "WZ" });
+    _countryList.Add(new SelectListItem { Text = "Sweden", Value = "SW" });
+    _countryList.Add(new SelectListItem { Text = "Switzerland", Value = "SZ" });
+    _countryList.Add(new SelectListItem { Text = "Syria", Value = "SY" });
+    _countryList.Add(new SelectListItem { Text = "Taiwan", Value = "TW" });
+    _countryList.Add(new SelectListItem { Text = "Tajikistin ", Value = "TI" });
+    _countryList.Add(new SelectListItem { Text = "Tanzania", Value = "TZ" });
+    _countryList.Add(new SelectListItem { Text = "Thailand", Value = "TH" });
+    _countryList.Add(new SelectListItem { Text = "Togo ", Value = "TO" });
+    _countryList.Add(new SelectListItem { Text = "Tokelau ", Value = "TL" });
+    _countryList.Add(new SelectListItem { Text = "Tonga", Value = "TN" });
+    _countryList.Add(new SelectListItem { Text = "Trinidad and Tobago", Value = "TD" });
+    _countryList.Add(new SelectListItem { Text = "Tristan Da Cunha", Value = "XT" });
+    _countryList.Add(new SelectListItem { Text = "Tromelin Island", Value = "TE" });
+    _countryList.Add(new SelectListItem { Text = "Tunisia ", Value = "TS" });
+    _countryList.Add(new SelectListItem { Text = "Turkey", Value = "TU" });
+    _countryList.Add(new SelectListItem { Text = "Turkmenistan", Value = "TX" });
+    _countryList.Add(new SelectListItem { Text = "Turks and Caicos Islands", Value = "TK" });
+    _countryList.Add(new SelectListItem { Text = "Tuvalu", Value = "TV" });
+    _countryList.Add(new SelectListItem { Text = "Uganda", Value = "UG" });
+    _countryList.Add(new SelectListItem { Text = "Ukraine ", Value = "UP" });
+    _countryList.Add(new SelectListItem { Text = "United Arab Emirates ", Value = "AE" });
+    _countryList.Add(new SelectListItem { Text = "Uruguay ", Value = "UY" });
+    _countryList.Add(new SelectListItem { Text = "Uzbekistan ", Value = "UZ" });
+    _countryList.Add(new SelectListItem { Text = "Vanuatu ", Value = "NH" });
+    _countryList.Add(new SelectListItem { Text = "Vatican City", Value = "VT" });
+    _countryList.Add(new SelectListItem { Text = "Venezuela", Value = "VE" });
+    _countryList.Add(new SelectListItem { Text = "Vietnam ", Value = "VM" });
+    _countryList.Add(new SelectListItem { Text = "Virgin Islands ", Value = "VQ" });
+    _countryList.Add(new SelectListItem { Text = "Wake Island", Value = "WQ" });
+    _countryList.Add(new SelectListItem { Text = "Wales", Value = "XW" });
+    _countryList.Add(new SelectListItem { Text = "Wallis and Futuna ", Value = "WF" });
+    _countryList.Add(new SelectListItem { Text = "West Bank", Value = "WE" });
+    _countryList.Add(new SelectListItem { Text = "Western Sahara ", Value = "WI" });
+    _countryList.Add(new SelectListItem { Text = "Yemen(Aden)", Value = "YM" });
+    _countryList.Add(new SelectListItem { Text = "Yugoslavia ", Value = "YI" });
+    _countryList.Add(new SelectListItem { Text = "Zambia", Value = "ZA" });
+    _countryList.Add(new SelectListItem { Text = "Zimbabwe", Value = "ZI" });
+    _countryList.Add(new SelectListItem { Text = "Curacao", Value = "UC" });
+    _countryList.Add(new SelectListItem { Text = "Holy See", Value = "VT" });
+    _countryList.Add(new SelectListItem { Text = "Kosovo", Value = "KV" });
+    _countryList.Add(new SelectListItem { Text = "Palau", Value = "PS" });
+    _countryList.Add(new SelectListItem { Text = "Saint Barthelemy", Value = "TB" });
+    _countryList.Add(new SelectListItem { Text = "Saint Martin", Value = "RN" });
+    _countryList.Add(new SelectListItem { Text = "Sint Maarten", Value = "NN" });
+    _countryList.Add(new SelectListItem { Text = "South Sudan", Value = "OD" });
+    _countryList.Add(new SelectListItem { Text = "United Kingdom", Value = "UK" });
+    _countryList.Add(new SelectListItem { Text = "USA ", Value = "US" });
+}
+
+<div class="col-md-12 col-lg-12">
+    @using (Html.BeginForm("", "", FormMethod.Post, new { id = "UpdatereturnForm" }))
+    {
+        <h1 class="pageTitle">Form W-2 Update</h1>
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                    <h4 class="panel-title">
+                        Employer Details
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <table class="responsive">
+                            <tr>
+                                <td class="labelName"><label class="control-label">Submission Id:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.SubmissionId, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Record Id:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].RecordId, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Employer Name:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Business.BusinessNm, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Employer Type:</label></td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.W2Forms[0].Business.BusinessType, new SelectList(_businessTypeList, "value", "text", null), "Select Employer Type", new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"> <label class="control-label">EIN:</label> </td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Business.EINorSSN, new { @class = "form-control" })</td>
+                                @Html.HiddenFor(model => model.W2Forms[0].Business.IsEIN)
+                                <td class="labelName"><label class="control-label">Address Line1:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Business.USAddress.Address1, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+
+                            <tr>
+                                <td class="labelName"><label class="control-label">Address Line2:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Business.USAddress.Address2, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">City:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Business.USAddress.City, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">State:</label></td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.W2Forms[0].Business.USAddress.State, new SelectList(_USStates, "value", "text", null), "Select State", new { @class = "form-control" })
+                                </td>
+                                <td class="labelName"><label class="control-label">Zip Code:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Business.USAddress.ZipCd, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                @*<td class="labelName"><label class="control-label">Country:</label></td>
+                                    <td>
+                                        @Html.DropDownListFor(model => model.Business.ForeignAddress.Country, new SelectList(_countryList, "value", "text", null), "Select Country", new { @class = "form-control" })
+                                    </td>*@
+                                <td class="labelName"><label class="control-labeld">Contact Name:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Business.ContactNm, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Email Address:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Business.Email, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Phone Number:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Business.Phone, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Phone Extn:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Business.PhoneExtn, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Fax Number:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Business.Fax, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Kind Of Employer:</label></td>
+                                <td class="fieldName">@Html.DropDownListFor(model => model.W2Forms[0].Business.KindOfEmployer, new SelectList(_kindOfEmployer, "value", "text", null), "Select Employer Type", new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Employment Code:</label></td>
+                                <td class="fieldName">@Html.DropDownListFor(model => model.W2Forms[0].Business.KindOfPayer, new SelectList(_employmentCd, "value", "text", null), "Select Employer Type", new { @class = "form-control" })</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                    <h4 class="panel-title">
+                        Employee Details
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="responsive">
+                            <tr>
+                                <td class="labelName"><label class="control-label">SSN:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Employee.SSN, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">First Name:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Employee.FirstNm, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Last Name:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Employee.LastNm, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Suffix:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Employee.Suffix, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Address Line1:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Employee.USAddress.Address1, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Address Line2:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Employee.USAddress.Address2, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">City:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Employee.USAddress.City, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">State:</label></td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.W2Forms[0].Employee.USAddress.State, new SelectList(_USStates, "value", "text", null), "Select State", new { @class = "form-control floatL" })
+                                </td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Zip Code:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Employee.USAddress.ZipCd, new { @class = "form-control" })</td>
+                                @*<td class="labelName"><label class="control-label">Country:</label></td>
+                                    <td class="fieldName">@Html.DropDownListFor(model => model.Employee.Country, new SelectList(_countryList, "value", "text", null), "Select Country", new { @class = "form-control" })</td>*@
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Email:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Employee.Email, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Phone:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].Employee.Phone, new { @class = "form-control" })</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                    <h4 class="panel-title">
+                        FormW2 Details
+                    </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse">
+                    <div class="panel-body">
+
+                        <table class="responsive">
+                            <tr>
+                                <td class="labelName"><label class="control-label">Wages and tips:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box1, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Federal income tax withheld:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box2, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Social security wages:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box3, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Social security tax withheld:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box4, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Medicare wages and tips:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box5, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Medicare tax withheld:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box6, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Social security tips:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box7, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Allocated tips:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box8, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Verification code:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box9, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Dependent care benefits:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box10, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Nonqualified plans:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box11NonQualPlan, new { @class = "form-control" })</td>
+
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">12a See instructions for box 12:</label></td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.W2Forms[0].FormDetails.Box12aCd, new SelectList(_Line12CodeList, "text", "value", null), "Select Code", new { @class = "form-control floatL", @style = "Width:60px" })
+                                    @Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box12aAmt, new { @class = "form-control", @style = "Width:185px;margin-left: 5px;" })
+                                </td>
+                                <td class="labelName"><label class="control-label">12b See instructions for box 12:</label></td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.W2Forms[0].FormDetails.Box12bCd, new SelectList(_Line12CodeList, "text", "value", null), "Select Code", new { @class = "form-control floatL", @style = "Width:60px" })
+                                    @Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box12bAmt, new { @class = "form-control", @style = "Width:185px;margin-left: 5px;" })
+                                </td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">12c See instructions for box 12:</label></td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.W2Forms[0].FormDetails.Box12cCd, new SelectList(_Line12CodeList, "text", "value", null), "Select Code", new { @class = "form-control floatL", @style = "Width:60px" })
+                                    @Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box12cAmt, new { @class = "form-control", @style = "Width:185px;margin-left: 5px;" })
+                                </td>
+                                <td class="labelName"><label class="control-label">12d See instructions for box 12:</label></td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.W2Forms[0].FormDetails.Box12dCd, new SelectList(_Line12CodeList, "text", "value", null), "Select Code", new { @class = "form-control floatL", @style = "Width:60px" })
+                                    @Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box12dAmt, new { @class = "form-control", @style = "Width:185px;margin-left: 5px;" })
+                                </td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Statutory Employee:</label></td>
+                                <td>
+                                    @Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box13IsStatEmp, new { @class = "form-control" })
+                                </td>
+                                <td class="labelName"><label class="control-label">Retirement plan:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box13IsRetPlan, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Third-party sick pay:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box13Is3rdPartySickPay, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Other</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box14, new { @class = "form-control" })</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                    <h4 class="panel-title">
+                        State Details
+                    </h4>
+                </div>
+                <div id="collapse4" class="panel-collapse collapse">
+                    <div class="panel-body">
+
+                        <table class="responsive">
+                            <tr>
+
+                                <td class="labelName"></td>
+                                <td class="fieldText font15">State 1 Detail</td>
+                                <td class="labelName"></td>
+                                <td class="fieldText font15">State 2 Detail</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">State Code:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box15State1Cd, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">State Code:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box15State2Cd, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Employer’s state ID number:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box15State1IdNum, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Employer’s state ID number:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box15State2IdNum, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">State wages, tips, etc.:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box16State1Wages, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">State wages, tips, etc.:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box16State2Wages, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">State income tax:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box17State1Tax, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">State income tax:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box17State2Tax, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Local wages, tips, etc.:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box18Local1Wages, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Local wages, tips, etc.:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box18Local2Wages, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Local income tax:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box19Local1Tax, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Local income tax:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box19Local2Tax, new { @class = "form-control" })</td>
+                            </tr>
+                            <tr><td class="spacer10"></td></tr>
+                            <tr>
+                                <td class="labelName"><label class="control-label">Locality name:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box20Locality1Nm, new { @class = "form-control" })</td>
+                                <td class="labelName"><label class="control-label">Locality name:</label></td>
+                                <td class="fieldName">@Html.TextBoxFor(model => model.W2Forms[0].FormDetails.Box20Locality2Nm, new { @class = "form-control" })</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.W2Forms[0].Business.IsEIN, new { @Value = "true" });
+    }
+    <div class="spacer10"></div>
+    <div class="taC">
+        <button type="button" class="btn btn_lg btn_primary" onclick="GetStatus()" id="btnCreate">
+            Update Return
+            <i class="fa fa-spinner fa-spin" aria-hidden="true" id="CreateSpinner" style="display:none"></i>
+        </button>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        $(".nav_menu li").removeClass('active');
+        $("#liformw2return").addClass('active');
+        $("#SubmissionId").val("");
+        $("#W2Forms_0__RecordId").val("");
+    });
+
+    function GetStatus() {
+        $("#W2Forms_0__Business_IsEIN").val(true);
+        var formdata = $("#UpdatereturnForm").serialize();
+        $("#CreateSpinner").show();
+        $("#btnCreate").prop("disabled", true);
+        $.ajax({
+            url: "/formw2/_APIUpdateResponseStatus/",
+            cache: false,
+            data: formdata,
+            type:"POST",
+            success: function (data) {
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+                $("#CreateSpinner").hide();
+                $("#btnCreate").prop("disabled", false);
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+</script>

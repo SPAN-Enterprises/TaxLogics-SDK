@@ -1,0 +1,71 @@
+﻿@model List<APIClientTool.ViewModels.EFileStatus>
+@{
+    ViewBag.Title = "API Option";
+}
+
+<div class="spacer25"></div><div id="GetEfileStatus"></div>
+<div class="spacer25"></div><div id="GetForm941EfileStatus"></div>
+<div class="spacer25"></div><div id="GetForm941SCHREfileStatus"></div>
+
+
+<script type="text/javascript">
+
+    $(function () {
+        GetEfileStatus();
+        GetForm941EfileStatus();
+        GetForm941SCHREfileStatus();
+        $(".nav_menu li").removeClass('active');
+        $("#liefilestatus").addClass('active');
+    });
+
+    function GetEfileStatus() {
+        $('#btnDropdown').html('Form W-2 <span class="caret"></span>')
+        $.ajax({
+            url: "/efile/_getefilestatus/",
+            cache: false,
+            data: {},
+            success: function (data) {
+                //$('#GetEfileStatus').html("");
+                $('#GetEfileStatus').html(data);
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+    function GetForm941EfileStatus() {
+        $('#btnDropdown').html('Form 941 <span class="caret"></span>')
+        $.ajax({
+            url: "/efile/_getform941efilestatus/",
+            cache: false,
+            data: {},
+            success: function (data) {
+                //$('#GetEfileStatus').html("");
+                $('#GetForm941EfileStatus').html(data);
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+    function GetForm941SCHREfileStatus() {
+        $('#btnDropdown').html('Form 941-SCHR <span class="caret"></span>')
+        $.ajax({
+            url: "/efile/_getform941schrefilestatus/",
+            cache: false,
+            data: {},
+            success: function (data) {
+                //$('#GetEfileStatus').html("");
+                $('#GetForm941SCHREfileStatus').html(data);
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+
+
+</script>

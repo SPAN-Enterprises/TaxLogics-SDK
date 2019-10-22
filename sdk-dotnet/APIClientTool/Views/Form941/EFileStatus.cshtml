@@ -1,0 +1,90 @@
+﻿@model List<APIClientTool.ViewModels.EFileStatus>
+@{
+    ViewBag.Title = "EFileStatus";
+}
+
+<h1 class="pageTitle">Form W-2 Efile Status</h1>
+
+<div id="GetEfileStatus">
+
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        GetEfileStatus();
+        $(".nav_menu li").removeClass('active');
+        $("#liefilestatus").addClass('active');
+    });
+
+
+    function APIValidate(id) {
+        $("#apivalspinner").show();
+        $.ajax({
+            url: "/FormW2/_APIValidate/",
+            cache: false,
+            data: { submissionId: id },
+            success: function (data) {
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+                $("#apivalspinner").hide();
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+    function Transmit(id) {
+        $("#TransmitSpinner").show();
+        $.ajax({
+            url: "/FormW2/_TransmitReturn/",
+            cache: false,
+            data: { submissionId: id },
+            success: function (data) {
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+                $("#TransmitSpinner").hide();
+                GetEfileStatus();
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+    function EfileStatus(id) {
+        $("#statusSpinner").show();
+        $.ajax({
+            url: "/FormW2/_GetEfileStatusResponse/",
+            cache: false,
+            data: { submissionId: id },
+            success: function (data) {
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+                $("#statusSpinner").hide();
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+    function GetEfileStatus() {
+        $.ajax({
+            url: "/FormW2/_GetEFileStatus/",
+            cache: false,
+            data: {},
+            success: function (data) {
+                $('#GetEfileStatus').html(data);
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+
+</script>

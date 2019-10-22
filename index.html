@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developers - TaxBandits</title>
+    <script src="http://tbsdev.taxvari.com/Scripts/jquery-1.10.2.js"></script>
+<script src="http://tbsdev.taxvari.comtbsdev.taxvari.com/Scripts/jquery-3.2.1.js"></script>
+<script src="http://tbsdev.taxvari.comtbsdev.taxvari.com/Scripts/jquery.dataTables.js"></script>
+<script src="http://tbsdev.taxvari.com/Scripts/jquery.colorbox.js"></script>
+<script src="http://tbsdev.taxvari.com/Scripts/bootstrap-datepicker.js"></script>
+
+    <script src="http://tbsdev.taxvari.com/Scripts/bootstrap.js"></script>
+<script src="http://tbsdev.taxvari.com/Scripts/respond.js"></script>
+
+    <script src="http://tbsdev.taxvari.com/Scripts/jquery.validate.js"></script>
+<script src="http://tbsdev.taxvari.com/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <script src="http://tbsdev.taxvari.com/Scripts/toastr.js"></script>
+
+    
+    <link href="http://tbsdev.taxvari.com/Content/bootstrap.css" rel="stylesheet"/>
+<link href="http://tbsdev.taxvari.com/Content/site.css" rel="stylesheet"/>
+<link href="http://tbsdev.taxvari.com/Content/jquery.dataTables.css" rel="stylesheet"/>
+<link href="http://tbsdev.taxvari.com/Content/responsive.css" rel="stylesheet"/>
+
+    <script src="http://tbsdev.taxvari.com/Scripts/modernizr-2.6.2.js"></script>
+<script src="http://tbsdev.taxvari.com/Scripts/modernizr-2.8.3.js"></script>
+
+
+    <link rel="icon" href="http://tbsdev.taxvari.com/Content/Images/favicon/favicon.ico" type="image/x-icon">
+    
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="body-content">
+        <div>
+            <header>
+                <div class="navbar">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <div class="logo">
+                                <img src="http://tbsdev.taxvari.com/Content/Images/logo.png" />
+                            </div>
+                        </div>
+                        <div class="navbar-collapse collapse" id="navbar-collapse" aria-expanded="false">
+                            <div class="rightTop taR">
+                                <div class="topDetails">
+                                    <i class="fa fa-envelope"></i>
+                                    <span>developer@taxbandits.com</span>
+                                    <i class="fa fa-mobile" style="padding-left:20px"></i>
+                                    <span>704.839.2321</span>
+                                </div>
+
+                            </div>
+                            <ul class="nav navbar-nav mTop15">
+                                <li id="home" class="active"><a href="/Home">Home</a></li>
+                                <li id="API"><a href="javascript:void(0)" onclick="GetAPI();">APIs</a></li>
+								 <li id="API"><a href="#" >C#</a></li>
+								  <li id="API"><a href="#" >Java</a></li>
+								  <li id="API"><a href="#" >Python</a></li>
+                                <!-- <li id="ContactUs"><a href="javascript:void(0)" class="btn btn-md btn-second" onclick="ContactUs();">Contact Us</a></li> -->
+                                <li><a href="/User/AccountLogIn/" class="btn btn-md btn-second">Sign In</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="clear"></div>
+            <div class="mainBody">
+                
+
+
+<div class="bannerSection">
+    <div class="container">
+        <div class="col-sm-7 taC">
+            <img class="imgRes" src="http://tbsdev.taxvari.com/Content/Images/bannerImg.jpg" />
+        </div>
+        <div class="col-sm-5">
+            <div class="bannerRight">
+                
+                <h2><i> Expand Your Software with our API Integration</i></h2>
+                <a href="#" class="btn btn-lg btn-primary">GET API</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="sectionOne section">
+    <div class="container ">
+        <h2 class="taC">Why <span class="orangeSelect"> TaxBandits </span> API</h2>
+        <p class="taC">As the experts in everything related to the Employment Taxes, TaxBandits API helps employers and other filers complete and submit their W-2/1099 & Employment Taxes.</p>
+        <p class="taC">Our aim is to give clients exceptional Tax Filing solution without wasting time that's critical to the success of your business.</p>
+
+            <div class="row productSection disFlex">
+                <div class="col-md-4 col-sm-4 disFlex">
+                    <div class="productOne">
+                        <div class="pLeftIcon">
+                            <img src="/Content/Images/registerIcon.png" />
+                        </div>
+                        <div class="pRightContent">
+                            <h3>Register</h3>
+                            <p>Registration is simple: just give us your basic information and number of employees to start using TaxBandits API in minutes. </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 disFlex">
+                <div class="productOne">
+                    <div class="pLeftIcon">
+                        <img src="/Content/Images/authenticateIcon.png" />
+                    </div>
+                    <div class="pRightContent">
+                        <h3>Authenticate</h3>
+                        <p>TaxBandits API follows authenticated W-2/1099 & Employment Taxes filing procedures recognized by the IRS to perform all of the work and analyses.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 disFlex">
+                <div class="productOne">
+                    <div class="pLeftIcon">
+                        <img src="/Content/Images/returnsIcon.png" />
+                    </div>
+                    <div class="pRightContent">
+                        <h3>Start Sending Returns</h3>
+                        <p>With a simple click, you can ensure your W-2/1099 & Employment Taxes Forms are securely transmitted and duly approved by the IRS.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="taC mTop30">
+            <a href="#" class="btn btn-lg btn-primary">Sign Up for TaxBandits API</a>
+        </div>
+    </div>
+</section>
+
+<section class="sectionTwo section">
+    <div class="container">
+        <div class="taC">
+            <h2>API Overview</h2>
+            <div class="row mTop20">
+                <div class="col-md-6 taC">
+                    <img class="imgRes mTop15" src="http://tbsdev.taxvari.com/Content/Images/apiOverview.png" />
+                </div>
+                <div class="col-md-6">
+                    <p>No matter what your tax filing needs are, TaxBandits API is just the solution to get the job done. TaxBandits API helps you stay on budget and on time with completing your clients' reporting in a simple and easy way. With TaxBandits API, you don't even have to worry about rejections or fines! TaxBandits API is led by pioneers of the best on the market. TaxBandits API is streamlined and concise and its functionality extends far beyond that of other Tax products.</p>
+                    <p>Whether you are filing for your organization or on behalf of multiple organizations, you will have access to our simplified, interview-style filing process that includes built-in error checks which ensure that your form is clear of any errors prior to transmitting to the IRS. You will also receive real-time updates regarding your filing and can easily access your account from anywhere and at any time, with no required software downloads or monthly fees.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="sectionThree section">
+    <div class="container taC">
+        <h2><span class="blueSelect">Success</span> Starts with TaxBandits</h2>
+        <h3><i>The Smart Business Owners Choice</i></h3>
+        <div class="clear spacer30"></div>
+        <a href="#" class="btn btn-lg btn-primary">Create a Free Account</a>
+    </div>
+</section>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <footer>
+            <div class="footer1">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12 fooListWrap">
+                            <h3 class="fooListHead">
+                                TaxBandits API
+                            </h3>
+                            <div class="fooList" id="fooLinkOne">
+                                <ul class="col-md-6 col-sm-6 col-xs-12">
+                                    <li>
+                                        <a href="/Support">Support</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Faq">FAQ</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Support/Status">API Status</a>
+                                    </li>
+                                </ul>
+                                <ul class="col-md-6 col-sm-6 col-xs-12">
+                                    <li>
+                                        <a href="">Contact Us</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Support/ReleaseNotes">Release Notes</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://blog.taxbandits.com/" target="_blank">Blog</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 fooListWrap">
+                            <h3 class="fooListHead">
+                                <br />
+                            </h3>
+                            <div id="fooLinkTwo" class="fooList">
+                                <ul class="col-md-6 col-sm-6 col-xs-12">
+                                    <li>
+                                        <a href="javascript:void(0)" onclick="GetAPI();">Business API</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)" onclick="GetAPI();">Form W2 API</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)" onclick="GetAPI();">Form 1099 MISC</a>
+                                    </li>
+                                </ul>
+                                <ul class="col-md-6 col-sm-6 col-xs-12">
+                                    <li>
+                                        <a href="javascript:void(0)" onclick="GetAPI();">Form 940 API</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)" onclick="GetAPI();">Form 941 API</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0)" onclick="GetAPI();">Form 944 API</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-sm-12 pTop5">
+                            <span> &copy; 2017 dev.taxbandits.com, <a href="http://www.spanenterprises.com/" target="_blank" title="SPAN Enterprises LLC">SPAN Enterprises LLC</a>. All rights reserved.</span>
+                            <br />
+                            <a href="/site-map/">Sitemap</a> | <a title="Terms and Conditions">Terms of Use</a> | <a href="#" title="Privacy Policy">Privacy Policy</a>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12 tabViewWrap">
+                            <div class="authorizeNetSeal">
+                                <img src="/Content/Images/secure90x72.gif.png" />
+                            </div>
+                            <a href="https://www.irs.gov/e-file-providers/tax-year-2016-94x-mef-providers" target="_blank" class="irslog">
+                                <img src="http://tbsdev.taxvari.com/Content/Images/irsLogo.png" alt="irs-authorized efile provider" />
+                            </a>
+                            <div class="comod-part">
+                                <img src="http://tbsdev.taxvari.com/Content/Images/comodo_secure_seal_100x85_transp.png" />
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            <ul class="socialIcon">
+                                <li>
+                                    <a href="https://www.facebook.com/ExpressTaxFilings/" title="facebook" target="_blank"><img src="http://tbsdev.taxvari.com/Content/Images/fb_icon.png" alt="TaxBandits Facebook" title="Follow Us on Facebook" /></a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/taxfilings/" title="twitter" target="_blank"><img src="http://tbsdev.taxvari.com/Content/Images/twitter_icon.png" alt="TaxBandits Twitter" title="Follow Us on Twitter" /></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/company/express-tax-filings/" title="linkedin" target="_blank"><img src="http://tbsdev.taxvari.com/Content/Images/linked_icon.png" alt="TaxBandits Linkedin" title="Follow Us on Linkedin" /></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.youtube.com/user/ExpressTaxFilings/" title="youtube" target="_blank"><img src="http://tbsdev.taxvari.com/Content/Images/ytube_icon.png" alt="TaxBandits Youtube" title="Subscribe to Our Youtube Channel" /></a>
+                                </li>
+                                <li>
+                                    <a href="https://plus.google.com/u/0/+Expresstaxfilings" title="google plus" target="_blank"><img src="http://tbsdev.taxvari.com/Content/Images/gplus_icon.png" alt="TaxBandits Google+" title="Follow Us on Googleplus" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    .
+
+    <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content" id="ModelBody">
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</body>
+</html>
+
+<script>
+    function GetAPI() {
+        $("#home").removeClass('active');
+        $("#API").addClass('active');
+        top.location.href = "http://api.taxvari.com/Explore/Index";
+    }
+    function ContactUs() {
+        $.ajax({
+            url: "/User/_ContactUs/",
+            cache: false,
+            success: function (data) {
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+                $('#myModal').modal({ backdrop: 'static' });
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+</script>

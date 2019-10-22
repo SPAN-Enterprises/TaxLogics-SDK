@@ -1,0 +1,270 @@
+﻿@model APIClientTool.ViewModels.Form941SCHR.Form941SchRRecords
+@{ 
+    int ClientCount = Session["ClientCounts"] != null ? Utility.GetInt(Session["ClientCounts"]) : 1;
+    var CPEOWageTypeList = new List<SelectListItem>();
+    CPEOWageTypeList.Add(new SelectListItem() { Text = "A", Value = "A" });
+    CPEOWageTypeList.Add(new SelectListItem() { Text = "B", Value = "B" });
+    CPEOWageTypeList.Add(new SelectListItem() { Text = "C", Value = "C" });
+    CPEOWageTypeList.Add(new SelectListItem() { Text = "D", Value = "D" });
+    //bool isUpdateTrue = Session["Update"] != null ? Utility.GetBool(Session["Update"]) : false; 
+    bool isUpdateClient = Session["UpdateClient"] != null ? Utility.GetBool(Session["UpdateClient"]) : false;
+}
+<div class="modal-header edit-modal-header">
+    <button type="button" class="close" data-dismiss="modal"></button>
+    <span class="modal-title edit-title ">Add Clients Form 941-SCHR</span>
+</div>
+
+<div class="modal-body edit-modal-body modalFormTable modalInnerScroll">
+    @using (Html.BeginForm("", "", FormMethod.Post, new { id = "Create941SCHRAddClient" }))
+    {
+        <table style="max-width:840px">
+            <tr id="tr_0">
+                <td class="labelName" style="width:auto">
+                    Submission Id :
+                </td>
+                <td class="fieldset vaT payer_field" style="width:auto">
+                    @Html.TextBoxFor(model => Model.SubmissionId,"", new { minlength = "36", maxlength = "36",@id= "SubmissionId" })
+                </td>
+            </tr>
+            <tr>
+                <td class="spacer10"></td>
+            </tr>
+            <tr id="tr_0">
+                <td class="labelName" style="width:auto">
+                    Record Id :
+                </td>
+                <td class="fieldset vaT payer_field" style="width:auto">
+                    @Html.TextBoxFor(model => Model.RecordId, null, new { @Id = "RecordId" })
+                </td>
+            </tr>
+            <tr>
+                <td class="spacer10"></td>
+            </tr>
+
+        </table>
+        <div class="panel-group Accordion" id="accordion">
+            <div class="panel panel-default">
+                <a data-toggle="collapse" class="collapsed" data-parent="#accordion" href="#collapse1">
+                    <h4 class="panel-title">
+                        Form 941 Aggregate Client Details
+                        <i class="more-less fa fa-angle-up">
+                        </i>
+                    </h4>
+                </a>
+                <div id="collapse1" class="panel-collapse collapse">
+                    <div class="panel-group Accordion2" id="accordion2">
+                     @if (Model != null)
+                        {
+                        for (int i = 0; i < ClientCount; i++)
+                        {
+                        <div class="panel panel-default">
+                            <a data-toggle="collapse" class="collapsed" data-parent="#accordion2" href="#collapse@(10 + i)">
+                                <h4 class="panel-title">
+                                    Form 941 Aggregate Client @(i + 1) Details
+                                    <i class="more-less fa fa-angle-up">
+                                    </i>
+                                </h4>
+                            </a>
+                            <div id="collapse@(10 + i)" class="panel-collapse collapse">
+                                <div class="form_941 taR_input formDiv" id="tabs-0" style="padding:0px">
+                                    <table id="DivsocialsecurityorMedicaretax" class="tdDisBlock640">
+                                        @if (isUpdateClient)
+                                        {
+                                            <tr>
+                                                <td class="labelNameL">
+                                                    <span class="red">*</span> Client's Record Id:
+                                                </td>
+                                                <td class="apifieldname">
+                                                    @Html.TextBoxFor(model => Model.Form941ClientDetails[i].CRecordId,"", new { @tabindex = "1", @datatip = "1029", @maxlength = "36" })
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="spacer10"></td>
+                                            </tr>
+                                        }
+
+                                        <tr>
+                                            <td class="labelNameL">
+                                                <span class="red">*</span> Client's Sequence Id:
+                                            </td>
+                                            <td class="apifieldname">
+                                                @Html.TextBoxFor(model => Model.Form941ClientDetails[i].CSeqId,"", new { @tabindex = "1", @datatip = "1029", @maxlength = "36" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="spacer10"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="labelNameL">
+                                                <label>
+                                                    <span class="red">*</span>1(a).  Client's Business Name:
+                                                </label>
+                                            </td>
+                                            <td class="apifieldname">
+                                                @Html.TextBoxFor(model => Model.Form941ClientDetails[i].ClientName, "", new { @tabindex = "1", @datatip = "1029"})
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="spacer10"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="labelNameL">
+                                                <label>
+                                                    <span class="red">*</span>1(b).  Client's Employer Identification Number (EIN):
+                                                </label>
+                                            </td>
+                                            <td class="apifieldname">
+                                                @Html.TextBoxFor(model => Model.Form941ClientDetails[i].ClientEIN,"", new { @tabindex = "1", @datatip = "1029", @class = "ClientEINDetails" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="spacer10"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="labelNameL">
+                                                <label>
+                                                    2.   Type of wages, tips, and other compensation:
+                                                </label>
+                                            </td>
+                                            <td class="apifieldname">
+                                                @Html.DropDownListFor(model => Model.Form941ClientDetails[i].WagesTypeCd, CPEOWageTypeList, "--Select--", new { @tabindex = "2" })
+                                                @*@Html.EnumDropDownListFor(model => Model.Form941Records[0].ReturnData.Form941ClientDetails[i].CPEOWageType, "Select", new { @tabindex = "2" })*@
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="spacer10"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="labelNameL">
+                                                <label>
+                                                    3.  Wages, tips, and other compensation allocated to this client:
+                                                </label>
+                                            </td>
+                                            <td class="apifieldname">
+                                                @Html.TextBoxFor(model => Model.Form941ClientDetails[i].WagesAmt,"", new { @maxlength = "17", @tabindex = "3", @datatip = "1030",@Value=""})
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="spacer10"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="labelNameL">
+                                                <label>
+                                                    4.  Federal income tax withheld from wages, tips, and other compensation allocated to this client:
+                                                </label>
+                                            </td>
+                                            <td class="apifieldname">
+                                                @Html.TextBoxFor(model => Model.Form941ClientDetails[i].FedIncomeTaxWHAmt,"", new { @maxlength = "17", @tabindex = "4", @datatip = "1031", @Value = "" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spacer10"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="labelNameL" id="tdZipCode">
+                                                5e. Total taxable wages & tips:
+                                            </td>
+                                            <td class="apifieldname vaT">
+                                                @Html.TextBoxFor(model => Model.Form941ClientDetails[i].Line5e, new { maxlength = "17", @tabindex = "127" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spacer10"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="labelNameL" id="tdZipCode">
+                                                5f. Section 3121(q) Notice and Demand—Tax due on unreported tips:
+                                            </td>
+                                            <td class="apifieldname vaT">
+                                                @Html.TextBoxFor(model => Model.Form941ClientDetails[i].TaxOnUnreportedTips3121qAmt,"", new { maxlength = "17", @tabindex = "130", @Value = "" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spacer10"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="labelNameL">
+                                                <label>
+                                                    11.Qualified small business payroll tax credit for increasing research activities:
+                                                </label>
+                                            </td>
+                                            <td class="apifieldname">
+                                                @Html.TextBoxFor(model => Model.Form941ClientDetails[i].Line11, new { @tabindex = "14", maxlength = "17", @datatip = "1063" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spacer10"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="labelNameL">
+                                                <label>
+                                                    12. Total taxes due after adjustments:
+                                                </label>
+                                            </td>
+                                            <td class="apifieldname">
+                                                @Html.TextBoxFor(model => Model.Form941ClientDetails[i].Line12, new { @tabindex = "14", maxlength = "17", @datatip = "1063" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spacer10"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="labelNameL">
+                                                <label>
+                                                    13.Total deposits for this quarter, plus any payments made with the return allocated to this client:
+                                                </label>
+                                            </td>
+                                            <td class="apifieldname">
+                                                @Html.TextBoxFor(model => Model.Form941ClientDetails[i].TotTaxDepositAmt,"", new { @tabindex = "14", maxlength = "17", @datatip = "1063", @Value = "" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spacer10"></td>
+                                        </tr>
+                                        @*<tr>
+                            <td class="tac">
+                                <a href="javascript:void(0)" class="btn-second" id="btnAdd" aria-invalid="false" tabindex="192">Add Clients Details</a>
+                            </td>
+                        </tr>*@
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                        }
+                    </div>
+                </div>
+                </div>
+            </div>
+            }
+        </div>
+
+<div class="modal-footer edit-modal-footer mTopNo">
+    <div class="taC">
+        <a href="javascript:void(0)" class="btn-second" id="btnCreate" aria-invalid="false" tabindex="192">Generate JSON</a>
+    </div>
+</div>
+
+<script>
+    var isUpdateClient='@(isUpdateClient)';
+    $(function () {
+        $('#SubmissionId').val('');
+    });
+
+    $("#btnCreate").click(function () {
+        var form = $("#Create941SCHRAddClient").serialize();
+        $.ajax({
+            url: "/Form941SCHR/GenerateCreate941SCHRAddClientsjson/",
+            cache: false,
+            data: form,
+            type: "POST",
+            success: function (data) {
+                $('#RequestJson').val(data);
+                $('#myModal').modal("hide");
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    })
+    </script>

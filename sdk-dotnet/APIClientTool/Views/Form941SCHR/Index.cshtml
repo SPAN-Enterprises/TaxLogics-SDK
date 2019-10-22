@@ -1,0 +1,2316 @@
+﻿@model APIClientTool.ViewModels.Form941SCHR.Form941SchRRecords
+@using APIClientTool.ViewModels
+@using APIClientTool.Utilities
+@{
+    ViewBag.Title = "Form 941-SCHR";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var CPEOWageTypeList = new List<SelectListItem>();
+    CPEOWageTypeList.Add(new SelectListItem() { Text = "A", Value = "A" });
+    CPEOWageTypeList.Add(new SelectListItem() { Text = "B", Value = "B" });
+    CPEOWageTypeList.Add(new SelectListItem() { Text = "C", Value = "C" });
+    CPEOWageTypeList.Add(new SelectListItem() { Text = "D", Value = "D" });
+
+    List<SelectListItem> BusinessTypeList = new List<SelectListItem>()
+    {
+         new SelectListItem { Text="Estate",Value="ESTE"},
+    new SelectListItem { Text="Partnership",Value="PART"},
+    new SelectListItem { Text="Corporation",Value="CORP"},
+    new SelectListItem { Text="Exempt Organization",Value="EORG"},
+    new SelectListItem { Text="Sole Proprietorship",Value="SPRO"}
+
+    };
+
+    List<SelectListItem> countryList = new List<SelectListItem>();
+    countryList.Add(new SelectListItem { Text = "Afghanistan", Value = "AF" });
+    countryList.Add(new SelectListItem { Text = "Akrotiri", Value = "AX" });
+    countryList.Add(new SelectListItem { Text = "Aland Island", Value = "XI" });
+    countryList.Add(new SelectListItem { Text = "Albania", Value = "AL" });
+    countryList.Add(new SelectListItem { Text = "Algeria", Value = "AG" });
+    countryList.Add(new SelectListItem { Text = "American Samoa", Value = "AQ" });
+    countryList.Add(new SelectListItem { Text = "Andorra", Value = "AN" });
+    countryList.Add(new SelectListItem { Text = "Angola ", Value = "AO" });
+    countryList.Add(new SelectListItem { Text = "Anguilla", Value = "AV" });
+    countryList.Add(new SelectListItem { Text = "Antarctica ", Value = "AY" });
+    countryList.Add(new SelectListItem { Text = "Antigua and Barbuda", Value = "AC" });
+    countryList.Add(new SelectListItem { Text = "Argentina", Value = "AR" });
+    countryList.Add(new SelectListItem { Text = "Armenia", Value = "AM" });
+    countryList.Add(new SelectListItem { Text = "Aruba", Value = "AA" });
+    countryList.Add(new SelectListItem { Text = "Ascension", Value = "XA" });
+    countryList.Add(new SelectListItem { Text = "Ashmore and Cartier Islands", Value = "AT" });
+    countryList.Add(new SelectListItem { Text = "Australia", Value = "AS" });
+    countryList.Add(new SelectListItem { Text = "Austria", Value = "AU" });
+    countryList.Add(new SelectListItem { Text = "Azerbaijan ", Value = "AJ" });
+    countryList.Add(new SelectListItem { Text = "Azores ", Value = "XZ" });
+    countryList.Add(new SelectListItem { Text = "Bahamas", Value = "BF" });
+    countryList.Add(new SelectListItem { Text = "Bahrain", Value = "BA" });
+    countryList.Add(new SelectListItem { Text = "Baker Islands", Value = "FQ" });
+    countryList.Add(new SelectListItem { Text = "Bangladesh ", Value = "BG" });
+    countryList.Add(new SelectListItem { Text = "Barbados", Value = "BB" });
+    countryList.Add(new SelectListItem { Text = "Bassas da India", Value = "BS" });
+    countryList.Add(new SelectListItem { Text = "Belarus", Value = "BO" });
+    countryList.Add(new SelectListItem { Text = "Belgium", Value = "BE" });
+    countryList.Add(new SelectListItem { Text = "Belize ", Value = "BH" });
+    countryList.Add(new SelectListItem { Text = "Benin", Value = "BN" });
+    countryList.Add(new SelectListItem { Text = "Bermuda", Value = "BD" });
+    countryList.Add(new SelectListItem { Text = "Bhutan ", Value = "BT" });
+    countryList.Add(new SelectListItem { Text = "Bolivia", Value = "BL" });
+    countryList.Add(new SelectListItem { Text = "Bosnia - Herzegovina ", Value = "BK" });
+    countryList.Add(new SelectListItem { Text = "Botswana", Value = "BC" });
+    countryList.Add(new SelectListItem { Text = "Bouvet Island", Value = "BV" });
+    countryList.Add(new SelectListItem { Text = "Brazil ", Value = "BR" });
+    countryList.Add(new SelectListItem { Text = "British Indian OceanTerritory", Value = "IO" });
+    countryList.Add(new SelectListItem { Text = "British Virgin Islands", Value = "VI" });
+    countryList.Add(new SelectListItem { Text = "Brunei ", Value = "BX" });
+    countryList.Add(new SelectListItem { Text = "Bulgaria", Value = "BU" });
+    countryList.Add(new SelectListItem { Text = "Burkina Faso", Value = "UV" });
+    countryList.Add(new SelectListItem { Text = "Burma", Value = "BM" });
+    countryList.Add(new SelectListItem { Text = "Burundi", Value = "BY" });
+    countryList.Add(new SelectListItem { Text = "Cambodia", Value = "CB" });
+    countryList.Add(new SelectListItem { Text = "Cameroon", Value = "CM" });
+    countryList.Add(new SelectListItem { Text = "Canada ", Value = "CA" });
+    countryList.Add(new SelectListItem { Text = "Canary Islands", Value = "XY" });
+    countryList.Add(new SelectListItem { Text = "Cape Verde ", Value = "CV" });
+    countryList.Add(new SelectListItem { Text = "Cayman Islands", Value = "CJ" });
+    countryList.Add(new SelectListItem { Text = "Central African Republic ", Value = "CT" });
+    countryList.Add(new SelectListItem { Text = "Chad", Value = "CD" });
+    countryList.Add(new SelectListItem { Text = "Channel Islands", Value = "XC" });
+    countryList.Add(new SelectListItem { Text = "Chile", Value = "CI" });
+    countryList.Add(new SelectListItem { Text = "China", Value = "CH" });
+    countryList.Add(new SelectListItem { Text = "Christmas Island ", Value = "KT" });
+    countryList.Add(new SelectListItem { Text = "Clipperton Island", Value = "IP" });
+    countryList.Add(new SelectListItem { Text = "Cocos(Keeling) Islands", Value = "CK" });
+    countryList.Add(new SelectListItem { Text = "Colombia", Value = "CO" });
+    countryList.Add(new SelectListItem { Text = "Congo(Brazzaville)", Value = "CF" });
+    countryList.Add(new SelectListItem { Text = "Congo(Kinshasa)", Value = "CG" });
+    countryList.Add(new SelectListItem { Text = "Cook Islands", Value = "CW" });
+    countryList.Add(new SelectListItem { Text = "Coral Sea Islands", Value = "CR" });
+    countryList.Add(new SelectListItem { Text = "Corsica", Value = "VP" });
+    countryList.Add(new SelectListItem { Text = "Costa Rica ", Value = "CS" });
+    countryList.Add(new SelectListItem { Text = "Cote D'Ivoire (IvoryCoast)", Value = "IV" });
+    countryList.Add(new SelectListItem { Text = "Croatia", Value = "HR" });
+    countryList.Add(new SelectListItem { Text = "Cuba", Value = "CU" });
+    countryList.Add(new SelectListItem { Text = "Cyprus ", Value = "CY" });
+    countryList.Add(new SelectListItem { Text = "Czech Republic", Value = "EZ" });
+    countryList.Add(new SelectListItem { Text = "Denmark", Value = "DA" });
+    countryList.Add(new SelectListItem { Text = "Dhekelia", Value = "DX" });
+    countryList.Add(new SelectListItem { Text = "Djibouti", Value = "DJ" });
+    countryList.Add(new SelectListItem { Text = "Dominica", Value = "DO" });
+    countryList.Add(new SelectListItem { Text = "Dominican Republic", Value = "DR" });
+    countryList.Add(new SelectListItem { Text = "East Timor ", Value = "TT" });
+    countryList.Add(new SelectListItem { Text = "Ecuador", Value = "EC" });
+    countryList.Add(new SelectListItem { Text = "Egypt", Value = "EG" });
+    countryList.Add(new SelectListItem { Text = "El Salvador", Value = "ES" });
+    countryList.Add(new SelectListItem { Text = "England", Value = "UK" });
+    countryList.Add(new SelectListItem { Text = "Equatorial Guinea", Value = "EK" });
+    countryList.Add(new SelectListItem { Text = "Eritrea", Value = "ER" });
+    countryList.Add(new SelectListItem { Text = "Estonia", Value = "EN" });
+    countryList.Add(new SelectListItem { Text = "Ethiopia", Value = "ET" });
+    countryList.Add(new SelectListItem { Text = "Europa Island", Value = "EU" });
+    countryList.Add(new SelectListItem { Text = "Falkland Islands(Islas Malvinas) ", Value = "FK" });
+    countryList.Add(new SelectListItem { Text = "Faroe Islands", Value = "FO" });
+    countryList.Add(new SelectListItem { Text = "Federated States of Micronesia", Value = "FM" });
+    countryList.Add(new SelectListItem { Text = "Fiji", Value = "FJ" });
+    countryList.Add(new SelectListItem { Text = "Finland", Value = "FI" });
+    countryList.Add(new SelectListItem { Text = "France ", Value = "FR" });
+    countryList.Add(new SelectListItem { Text = "French Guiana", Value = "FG" });
+    countryList.Add(new SelectListItem { Text = "French Polynesia ", Value = "FP" });
+    countryList.Add(new SelectListItem { Text = "French Southern and Antarctic Lands", Value = "FS" });
+    countryList.Add(new SelectListItem { Text = "Gabon", Value = "GB" });
+    countryList.Add(new SelectListItem { Text = "The Gambia ", Value = "GA" });
+    countryList.Add(new SelectListItem { Text = "Gaza Strip ", Value = "GZ" });
+    countryList.Add(new SelectListItem { Text = "Georgia", Value = "GG" });
+    countryList.Add(new SelectListItem { Text = "Germany", Value = "GM" });
+    countryList.Add(new SelectListItem { Text = "Ghana", Value = "GH" });
+    countryList.Add(new SelectListItem { Text = "Gibraltar", Value = "GI" });
+    countryList.Add(new SelectListItem { Text = "Glorioso Islands ", Value = "GO" });
+    countryList.Add(new SelectListItem { Text = "Greece ", Value = "GR" });
+    countryList.Add(new SelectListItem { Text = "Greenland", Value = "GL" });
+    countryList.Add(new SelectListItem { Text = "Grenada", Value = "GJ" });
+    countryList.Add(new SelectListItem { Text = "Grenadines ", Value = "VC" });
+    countryList.Add(new SelectListItem { Text = "Guadeloupe ", Value = "GP" });
+    countryList.Add(new SelectListItem { Text = "Guam", Value = "GQ" });
+    countryList.Add(new SelectListItem { Text = "Guatemala", Value = "GT" });
+    countryList.Add(new SelectListItem { Text = "Guernsey", Value = "GK" });
+    countryList.Add(new SelectListItem { Text = "Guinea ", Value = "GV" });
+    countryList.Add(new SelectListItem { Text = "Guinea - Bissau", Value = "PU" });
+    countryList.Add(new SelectListItem { Text = "Guyana ", Value = "GY" });
+    countryList.Add(new SelectListItem { Text = "Haiti", Value = "HA" });
+    countryList.Add(new SelectListItem { Text = "Heard Island and McDonald Islands", Value = "HM" });
+    countryList.Add(new SelectListItem { Text = "Honduras", Value = "HO" });
+    countryList.Add(new SelectListItem { Text = "Hong Kong", Value = "HK" });
+    countryList.Add(new SelectListItem { Text = "Howland Island", Value = "HQ" });
+    countryList.Add(new SelectListItem { Text = "Hungary", Value = "HU" });
+    countryList.Add(new SelectListItem { Text = "Iceland", Value = "IC" });
+    countryList.Add(new SelectListItem { Text = "India", Value = "IN" });
+    countryList.Add(new SelectListItem { Text = "Indonesia", Value = "ID" });
+    countryList.Add(new SelectListItem { Text = "Iran", Value = "IR" });
+    countryList.Add(new SelectListItem { Text = "Iraq", Value = "IZ" });
+    countryList.Add(new SelectListItem { Text = "Ireland", Value = "EI" });
+    countryList.Add(new SelectListItem { Text = "Israel ", Value = "IS" });
+    countryList.Add(new SelectListItem { Text = "Italy", Value = "IT" });
+    countryList.Add(new SelectListItem { Text = "Jamaica", Value = "JM" });
+    countryList.Add(new SelectListItem { Text = "Jan Mayen", Value = "JN" });
+    countryList.Add(new SelectListItem { Text = "Japan", Value = "JA" });
+    countryList.Add(new SelectListItem { Text = "Jarvis Island", Value = "DQ" });
+    countryList.Add(new SelectListItem { Text = "Jersey ", Value = "JE" });
+    countryList.Add(new SelectListItem { Text = "Johnston Atoll", Value = "JQ" });
+    countryList.Add(new SelectListItem { Text = "Jordan ", Value = "JO" });
+    countryList.Add(new SelectListItem { Text = "Juan de Nova Island", Value = "JU" });
+    countryList.Add(new SelectListItem { Text = "Kazakhstan ", Value = "KZ" });
+    countryList.Add(new SelectListItem { Text = "Kenya", Value = "KE" });
+    countryList.Add(new SelectListItem { Text = "Kingman Reef", Value = "KQ" });
+    countryList.Add(new SelectListItem { Text = "Kiribati", Value = "KR" });
+    countryList.Add(new SelectListItem { Text = "Korea, Democratic People's Republic of (North)", Value = "KN" });
+    countryList.Add(new SelectListItem { Text = "Korea, Republic of (South)", Value = "KS" });
+    countryList.Add(new SelectListItem { Text = "Kuwait ", Value = "KU" });
+    countryList.Add(new SelectListItem { Text = "Kyrgyzstan ", Value = "KG" });
+    countryList.Add(new SelectListItem { Text = "Laos", Value = "LA" });
+    countryList.Add(new SelectListItem { Text = "Latvia ", Value = "LG" });
+    countryList.Add(new SelectListItem { Text = "Lebanon", Value = "LE" });
+    countryList.Add(new SelectListItem { Text = "Lesotho", Value = "LT" });
+    countryList.Add(new SelectListItem { Text = "Liberia", Value = "LI" });
+    countryList.Add(new SelectListItem { Text = "Libya", Value = "LY" });
+    countryList.Add(new SelectListItem { Text = "Liechtenstein", Value = "LS" });
+    countryList.Add(new SelectListItem { Text = "Lithuania", Value = "LH" });
+    countryList.Add(new SelectListItem { Text = "Luxembourg ", Value = "LU" });
+    countryList.Add(new SelectListItem { Text = "Macau", Value = "MC" });
+    countryList.Add(new SelectListItem { Text = "Macedonia", Value = "MK" });
+    countryList.Add(new SelectListItem { Text = "Madagascar ", Value = "MA" });
+    countryList.Add(new SelectListItem { Text = "Malawi ", Value = "MI" });
+    countryList.Add(new SelectListItem { Text = "Malaysia", Value = "MY" });
+    countryList.Add(new SelectListItem { Text = "Maldives", Value = "MV" });
+    countryList.Add(new SelectListItem { Text = "Mali", Value = "ML" });
+    countryList.Add(new SelectListItem { Text = "Malta", Value = "MT" });
+    countryList.Add(new SelectListItem { Text = "Man, Isle of", Value = "IM" });
+    countryList.Add(new SelectListItem { Text = "Marshall Islands ", Value = "RM" });
+    countryList.Add(new SelectListItem { Text = "Martinique ", Value = "MB" });
+    countryList.Add(new SelectListItem { Text = "Mauritania ", Value = "MR" });
+    countryList.Add(new SelectListItem { Text = "Mauritius", Value = "MP" });
+    countryList.Add(new SelectListItem { Text = "Mayotte", Value = "MF" });
+    countryList.Add(new SelectListItem { Text = "Mexico ", Value = "MX" });
+    countryList.Add(new SelectListItem { Text = "Midway Islands", Value = "MQ" });
+    countryList.Add(new SelectListItem { Text = "Moldova", Value = "MD" });
+    countryList.Add(new SelectListItem { Text = "Monaco ", Value = "MN" });
+    countryList.Add(new SelectListItem { Text = "Mongolia", Value = "MG" });
+    countryList.Add(new SelectListItem { Text = "Montenegro ", Value = "MJ" });
+    countryList.Add(new SelectListItem { Text = "Montserrat ", Value = "MH" });
+    countryList.Add(new SelectListItem { Text = "Morocco", Value = "MO" });
+    countryList.Add(new SelectListItem { Text = "Mozambique ", Value = "MZ" });
+    countryList.Add(new SelectListItem { Text = "Myanmar", Value = "XM" });
+    countryList.Add(new SelectListItem { Text = "Namibia", Value = "WA" });
+    countryList.Add(new SelectListItem { Text = "Nauru", Value = "NR" });
+    countryList.Add(new SelectListItem { Text = "Navassa Island", Value = "BQ" });
+    countryList.Add(new SelectListItem { Text = "Nepal", Value = "NP" });
+    countryList.Add(new SelectListItem { Text = "Netherlands", Value = "NL" });
+    countryList.Add(new SelectListItem { Text = "Netherlands Antilles ", Value = "NT" });
+    countryList.Add(new SelectListItem { Text = "New Caledonia", Value = "NC" });
+    countryList.Add(new SelectListItem { Text = "New Zealand", Value = "NZ" });
+    countryList.Add(new SelectListItem { Text = "Nicaragua", Value = "NU" });
+    countryList.Add(new SelectListItem { Text = "Niger", Value = "NG" });
+    countryList.Add(new SelectListItem { Text = "Nigeria", Value = "NI" });
+    countryList.Add(new SelectListItem { Text = "Niue", Value = "NE" });
+    countryList.Add(new SelectListItem { Text = "Norfolk Island", Value = "NF" });
+    countryList.Add(new SelectListItem { Text = "Northern Ireland ", Value = "XN" });
+    countryList.Add(new SelectListItem { Text = "Northern Mariana Islands ", Value = "CQ" });
+    countryList.Add(new SelectListItem { Text = "Norway ", Value = "NO" });
+    countryList.Add(new SelectListItem { Text = "Oman", Value = "MU" });
+    countryList.Add(new SelectListItem { Text = "Other Country (country not identified elsewhere)", Value = "OC" });
+    countryList.Add(new SelectListItem { Text = "Pakistan", Value = "PK" });
+    countryList.Add(new SelectListItem { Text = "Palmyra Atoll", Value = "LQ" });
+    countryList.Add(new SelectListItem { Text = "Palau", Value = "PS" });
+    countryList.Add(new SelectListItem { Text = "Panama ", Value = "PM" });
+    countryList.Add(new SelectListItem { Text = "Papua - New Guinea", Value = "PP" });
+    countryList.Add(new SelectListItem { Text = "Paracel Islands ", Value = "PF" });
+    countryList.Add(new SelectListItem { Text = "Paraguay", Value = "PA" });
+    countryList.Add(new SelectListItem { Text = "Peru ", Value = "PE" });
+    countryList.Add(new SelectListItem { Text = "Philippines", Value = "RP" });
+    countryList.Add(new SelectListItem { Text = "Pitcairn Islands", Value = "PC" });
+    countryList.Add(new SelectListItem { Text = "Poland", Value = "PL" });
+    countryList.Add(new SelectListItem { Text = "Portugal", Value = "PO" });
+    countryList.Add(new SelectListItem { Text = "Puerto Rico", Value = "RQ" });
+    countryList.Add(new SelectListItem { Text = "Qatar", Value = "QA" });
+    countryList.Add(new SelectListItem { Text = "Reunion ", Value = "RE" });
+    countryList.Add(new SelectListItem { Text = "Romania ", Value = "RO" });
+    countryList.Add(new SelectListItem { Text = "Russia", Value = "RS" });
+    countryList.Add(new SelectListItem { Text = "Rwanda", Value = "RW" });
+    countryList.Add(new SelectListItem { Text = "Samoa and Western Samoa ", Value = "WS" });
+    countryList.Add(new SelectListItem { Text = "San Marino ", Value = "SM" });
+    countryList.Add(new SelectListItem { Text = "Sao Tome and Principe", Value = "TP" });
+    countryList.Add(new SelectListItem { Text = "Saudi Arabia", Value = "SA" });
+    countryList.Add(new SelectListItem { Text = "Scotland", Value = "XS" });
+    countryList.Add(new SelectListItem { Text = "Senegal ", Value = "SG" });
+    countryList.Add(new SelectListItem { Text = "Serbia", Value = "RI" });
+    countryList.Add(new SelectListItem { Text = "Seychelles ", Value = "SE" });
+    countryList.Add(new SelectListItem { Text = "Sierra Leone", Value = "SL" });
+    countryList.Add(new SelectListItem { Text = "Singapore", Value = "SN" });
+    countryList.Add(new SelectListItem { Text = "Slovak Republic", Value = "XR" });
+    countryList.Add(new SelectListItem { Text = "Slovakia", Value = "LO" });
+    countryList.Add(new SelectListItem { Text = "Slovenia", Value = "SI" });
+    countryList.Add(new SelectListItem { Text = "Solomon Islands", Value = "BP" });
+    countryList.Add(new SelectListItem { Text = "Somalia ", Value = "SO" });
+    countryList.Add(new SelectListItem { Text = "South Africa", Value = "SF" });
+    countryList.Add(new SelectListItem { Text = "South Georgia and the South Sandwich Islands ", Value = "SX" });
+    countryList.Add(new SelectListItem { Text = "Spain", Value = "SP" });
+    countryList.Add(new SelectListItem { Text = "Spratly Islands", Value = "PG" });
+    countryList.Add(new SelectListItem { Text = "Sri Lanka", Value = "CE" });
+    countryList.Add(new SelectListItem { Text = "St.Helena", Value = "SH" });
+    countryList.Add(new SelectListItem { Text = "St.Kitts and Nevis", Value = "SC" });
+    countryList.Add(new SelectListItem { Text = "St.Lucia Island", Value = "ST" });
+    countryList.Add(new SelectListItem { Text = "St.Pierre and Miquelon", Value = "SB" });
+    countryList.Add(new SelectListItem { Text = "St.Vincent and the Grenadines ", Value = "VC" });
+    countryList.Add(new SelectListItem { Text = "Sudan", Value = "SU" });
+    countryList.Add(new SelectListItem { Text = "Suriname", Value = "NS" });
+    countryList.Add(new SelectListItem { Text = "Svalbard", Value = "SV" });
+    countryList.Add(new SelectListItem { Text = "Swaziland", Value = "WZ" });
+    countryList.Add(new SelectListItem { Text = "Sweden", Value = "SW" });
+    countryList.Add(new SelectListItem { Text = "Switzerland", Value = "SZ" });
+    countryList.Add(new SelectListItem { Text = "Syria", Value = "SY" });
+    countryList.Add(new SelectListItem { Text = "Taiwan", Value = "TW" });
+    countryList.Add(new SelectListItem { Text = "Tajikistin ", Value = "TI" });
+    countryList.Add(new SelectListItem { Text = "Tanzania", Value = "TZ" });
+    countryList.Add(new SelectListItem { Text = "Thailand", Value = "TH" });
+    countryList.Add(new SelectListItem { Text = "Togo ", Value = "TO" });
+    countryList.Add(new SelectListItem { Text = "Tokelau ", Value = "TL" });
+    countryList.Add(new SelectListItem { Text = "Tonga", Value = "TN" });
+    countryList.Add(new SelectListItem { Text = "Trinidad and Tobago", Value = "TD" });
+    countryList.Add(new SelectListItem { Text = "Tristan Da Cunha", Value = "XT" });
+    countryList.Add(new SelectListItem { Text = "Tromelin Island", Value = "TE" });
+    countryList.Add(new SelectListItem { Text = "Tunisia ", Value = "TS" });
+    countryList.Add(new SelectListItem { Text = "Turkey", Value = "TU" });
+    countryList.Add(new SelectListItem { Text = "Turkmenistan", Value = "TX" });
+    countryList.Add(new SelectListItem { Text = "Turks and Caicos Islands", Value = "TK" });
+    countryList.Add(new SelectListItem { Text = "Tuvalu", Value = "TV" });
+    countryList.Add(new SelectListItem { Text = "Uganda", Value = "UG" });
+    countryList.Add(new SelectListItem { Text = "Ukraine ", Value = "UP" });
+    countryList.Add(new SelectListItem { Text = "United Arab Emirates ", Value = "AE" });
+    countryList.Add(new SelectListItem { Text = "Uruguay ", Value = "UY" });
+    countryList.Add(new SelectListItem { Text = "Uzbekistan ", Value = "UZ" });
+    countryList.Add(new SelectListItem { Text = "Vanuatu ", Value = "NH" });
+    countryList.Add(new SelectListItem { Text = "Vatican City", Value = "VT" });
+    countryList.Add(new SelectListItem { Text = "Venezuela", Value = "VE" });
+    countryList.Add(new SelectListItem { Text = "Vietnam ", Value = "VM" });
+    countryList.Add(new SelectListItem { Text = "Virgin Islands ", Value = "VQ" });
+    countryList.Add(new SelectListItem { Text = "Wake Island", Value = "WQ" });
+    countryList.Add(new SelectListItem { Text = "Wales", Value = "XW" });
+    countryList.Add(new SelectListItem { Text = "Wallis and Futuna ", Value = "WF" });
+    countryList.Add(new SelectListItem { Text = "West Bank", Value = "WE" });
+    countryList.Add(new SelectListItem { Text = "Western Sahara ", Value = "WI" });
+    countryList.Add(new SelectListItem { Text = "Yemen(Aden)", Value = "YM" });
+    countryList.Add(new SelectListItem { Text = "Yugoslavia ", Value = "YI" });
+    countryList.Add(new SelectListItem { Text = "Zambia", Value = "ZA" });
+    countryList.Add(new SelectListItem { Text = "Zimbabwe", Value = "ZI" });
+    countryList.Add(new SelectListItem { Text = "Curacao", Value = "UC" });
+    countryList.Add(new SelectListItem { Text = "Holy See", Value = "VT" });
+    countryList.Add(new SelectListItem { Text = "Kosovo", Value = "KV" });
+    countryList.Add(new SelectListItem { Text = "Palau", Value = "PS" });
+    countryList.Add(new SelectListItem { Text = "Saint Barthelemy", Value = "TB" });
+    countryList.Add(new SelectListItem { Text = "Saint Martin", Value = "RN" });
+    countryList.Add(new SelectListItem { Text = "Sint Maarten", Value = "NN" });
+    countryList.Add(new SelectListItem { Text = "South Sudan", Value = "OD" });
+    countryList.Add(new SelectListItem { Text = "United Kingdom", Value = "UK" });
+    countryList.Add(new SelectListItem { Text = "USA ", Value = "US" });
+
+    List<SelectListItem> USStates = new List<SelectListItem>();
+    USStates.Add(new SelectListItem { Text = "Alabama (AL)", Value = "AL" });
+    USStates.Add(new SelectListItem { Text = "Alaska (AK)", Value = "AK" });
+    USStates.Add(new SelectListItem { Text = "Arizona (AZ)", Value = "AZ" });
+    USStates.Add(new SelectListItem { Text = "Arkansas (AR)", Value = "AR" });
+    USStates.Add(new SelectListItem { Text = "California (CA)", Value = "CA" });
+    USStates.Add(new SelectListItem { Text = "Colorado (CO)", Value = "CO" });
+    USStates.Add(new SelectListItem { Text = "Connecticut (CT)", Value = "CT" });
+    USStates.Add(new SelectListItem { Text = "Delaware (DE)", Value = "DE" });
+    USStates.Add(new SelectListItem { Text = "District of Columbia (DC)", Value = "DC" });
+    USStates.Add(new SelectListItem { Text = "Florida (FL)", Value = "FL" });
+    USStates.Add(new SelectListItem { Text = "Georgia (GA)", Value = "GA" });
+    USStates.Add(new SelectListItem { Text = "Hawaii (HI)", Value = "HI" });
+    USStates.Add(new SelectListItem { Text = "Idaho (ID)", Value = "ID" });
+    USStates.Add(new SelectListItem { Text = "Illinois (IL)", Value = "IL" });
+    USStates.Add(new SelectListItem { Text = "Indiana (IN)", Value = "IN" });
+    USStates.Add(new SelectListItem { Text = "Iowa (IA)", Value = "IA" });
+    USStates.Add(new SelectListItem { Text = "Kansas (KS)", Value = "KS" });
+    USStates.Add(new SelectListItem { Text = "Kentucky (KY)", Value = "KY" });
+    USStates.Add(new SelectListItem { Text = "Louisiana (LA)", Value = "LA" });
+    USStates.Add(new SelectListItem { Text = "Maine (ME)", Value = "ME" });
+    USStates.Add(new SelectListItem { Text = "Maryland (MD)", Value = "MD" });
+    USStates.Add(new SelectListItem { Text = "Massachusetts (MA)", Value = "MA" });
+    USStates.Add(new SelectListItem { Text = "Michigan (MI)", Value = "MI" });
+    USStates.Add(new SelectListItem { Text = "Minnesota (MN)", Value = "MN" });
+    USStates.Add(new SelectListItem { Text = "Mississippi (MS)", Value = "MS" });
+    USStates.Add(new SelectListItem { Text = "Missouri (MO)", Value = "MO" });
+    USStates.Add(new SelectListItem { Text = "Montana (MT)", Value = "MT" });
+    USStates.Add(new SelectListItem { Text = "Nebraska (NE)", Value = "NE" });
+    USStates.Add(new SelectListItem { Text = "Nevada (NV)", Value = "NV" });
+    USStates.Add(new SelectListItem { Text = "New Hampshire (NH)", Value = "NH" });
+    USStates.Add(new SelectListItem { Text = "New Jersey (NJ)", Value = "NJ" });
+    USStates.Add(new SelectListItem { Text = "New Mexico (NM)", Value = "NM" });
+    USStates.Add(new SelectListItem { Text = "New York (NY)", Value = "NY" });
+    USStates.Add(new SelectListItem { Text = "North Carolina (NC)", Value = "NC" });
+    USStates.Add(new SelectListItem { Text = "North Dakota (ND)", Value = "ND" });
+    USStates.Add(new SelectListItem { Text = "Ohio (OH)", Value = "OH" });
+    USStates.Add(new SelectListItem { Text = "Oklahoma (OK)", Value = "OK" });
+    USStates.Add(new SelectListItem { Text = "Oregon (OR)", Value = "OR" });
+    USStates.Add(new SelectListItem { Text = "Pennsylvania (PA)", Value = "PA" });
+    USStates.Add(new SelectListItem { Text = "Rhode Island (RI)", Value = "RI" });
+    USStates.Add(new SelectListItem { Text = "South Carolina (SC)", Value = "SC" });
+    USStates.Add(new SelectListItem { Text = "South Dakota (SD)", Value = "SD" });
+    USStates.Add(new SelectListItem { Text = "Tennessee (TN)", Value = "TN" });
+    USStates.Add(new SelectListItem { Text = "Texas (TX)", Value = "TX" });
+    USStates.Add(new SelectListItem { Text = "Utah (UT)", Value = "UT" });
+    USStates.Add(new SelectListItem { Text = "Vermont (VT)", Value = "VT" });
+    USStates.Add(new SelectListItem { Text = "Virginia (VA)", Value = "VA" });
+    USStates.Add(new SelectListItem { Text = "Washington (WA)", Value = "WA" });
+    USStates.Add(new SelectListItem { Text = "West Virginia (WV)", Value = "WV" });
+    USStates.Add(new SelectListItem { Text = "Wisconsin (WI)", Value = "WI" });
+    USStates.Add(new SelectListItem { Text = "Wyoming (WY)", Value = "WY" });
+    USStates.Add(new SelectListItem { Text = "American Samoa (AS)", Value = "AS" });
+    USStates.Add(new SelectListItem { Text = "Federated States of Micronesia (FM)", Value = "FM" });
+    USStates.Add(new SelectListItem { Text = "Guam (GU)", Value = "GU" });
+    USStates.Add(new SelectListItem { Text = "Marshall Islands (MH)", Value = "MH" });
+    USStates.Add(new SelectListItem { Text = "Northern Mariana Islands (MP)", Value = "MP" });
+    USStates.Add(new SelectListItem { Text = "Palau (PW)", Value = "PW" });
+    USStates.Add(new SelectListItem { Text = "Puerto Rico (PR)", Value = "PR" });
+    USStates.Add(new SelectListItem { Text = "Virgin Islands (VI)", Value = "VI" });
+    USStates.Add(new SelectListItem { Text = "Armed Forces Americas (AA)", Value = "AA" });
+    USStates.Add(new SelectListItem { Text = "Armed Forces Europe (AE)", Value = "AE" });
+    USStates.Add(new SelectListItem { Text = "Armed Forces Pacific (AP)", Value = "AP" });
+
+    List<SelectListItem> taxYear = new List<SelectListItem> {
+    new SelectListItem { Text = "2018", Value = "2018" }
+    };
+
+    List<SelectListItem> quarter = new List<SelectListItem> {
+        new SelectListItem { Text = "Q1", Value = "Q1" },
+        new SelectListItem { Text = "Q2", Value = "Q2" },
+        new SelectListItem { Text = "Q3", Value = "Q3" },
+        new SelectListItem { Text = "Q4", Value = "Q4" }
+    };
+
+    List<SelectListItem> signatureType = new List<SelectListItem> {
+        new SelectListItem { Text = "Online Signature PIN", Value = "ONLINE_SIGN_PIN" },
+        new SelectListItem { Text = "Reporting Agent PIN", Value = "REPORTING_AGENT" },
+        new SelectListItem { Text = "Form 8453", Value = "FORM_8453_EMP" }
+    };
+
+    var form8974 = new List<SelectListItem>();
+
+    int clientId = ViewData["ClientId"] != null ? Utility.GetInt(ViewData["ClientId"]) : 0;
+    int ClientCount = Session["ClientCounts"] != null ? Utility.GetInt(Session["ClientCounts"]) : 1;
+    bool isUpdateTrue = Session["Update"] != null ? Utility.GetBool(Session["Update"]) : false;
+
+}
+
+<div class="col-md-12 col-lg-12">
+    @using (Html.BeginForm("", "", FormMethod.Post, new { id = "CreateForm941SCHR" }))
+    {
+        <h1 class="pageTitle">Form941SCHR</h1>
+        <table class="responsive">
+            <tr>
+                <td class="labelName"> <label class="control-label">Add No of Clients:</label></td>
+                <td>
+                    @Html.TextBox("ClientCount", "", new { @id = "Clientcount", @class = "form-control" })
+                </td>
+                <td class="labelName"><label class="control-label">Tax Year</label></td>
+                <td class="fieldName">
+                    @Html.DropDownListFor(model => model.ReturnHeader.TaxYr, taxYear, "--Select--", new { @class = "form-control" })
+                </td>
+                <td class="labelName"><label class="control-label">Quarter</label></td>
+                <td class="fieldName">
+                    @Html.DropDownListFor(model => model.ReturnHeader.Qtr, quarter, "--Select--", new { @class = "form-control" })
+                </td>
+            </tr>
+            <tr><td class="spacer10"></td></tr>
+            <tr>
+                <td class="labelName">
+                    More Clients?:
+                </td>
+                <td class="fieldText vaT noWrap">
+                    <div class="field switch">
+                        @Html.RadioButtonFor(model => model.ReturnHeader.MoreClients, true, new { id = "rdoIsFinalReturnYes" })
+                        <label for="rdoIsFinalReturnYes" class="cb-disable"><span>Yes</span></label>
+                        @Html.RadioButtonFor(model => model.ReturnHeader.MoreClients, false, new { id = "rdoIsFinalReturnNo" })
+                        <label for="rdoIsFinalReturnNo" class="cb-enable"><span>No</span></label>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <table class="tdDisBlock640">
+            <tr>
+                <td class="spacer10"></td>
+            </tr>
+
+            <tr>
+                <td class="spacer10"></td>
+            </tr>
+        </table>
+
+        <div class="panel-group" id="accordion">
+
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                    <h4 class="panel-title">
+                        Busienss Details
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="responsive">
+                            <tr>
+                                <td class="labelName">
+                                    Business Type:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.DropDownListFor(model => Model.ReturnHeader.Business.BusinessType, BusinessTypeList, "-- Select--",
+               new { id = "BusinessType", @onchange = "AssignBusinessMembers();", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Employer Name:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.BusinessNm, new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    EIN:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.EINorSSN, new { maxlength = "9", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td colspan="3">
+                                    <div class="full_width">
+                                        @Html.CheckBoxFor(model => model.ReturnHeader.Business.IsForeign, new { onclick = "ChangeForeignAddr();", @class = "css-checkbox", id = "chkIsForeignAddress", @tabindex = "106" })
+                                        <label for="chkIsForeignAddress" class="css-label checkbox">Foreign Address (Outside US)?</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Address:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.USAddress.Address1, new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.Address1, new { @style = "display:none", @class = "form-control" })
+                                </td>
+                                <td class="labelName">
+                                    Address Cont:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.USAddress.Address2, new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.Address2, new { @style = "display:none", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="trcitystate">
+                                <td class="labelName">
+                                    City:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.USAddress.City, new { @id = "PayerCity", maxlength = "22", @class = "form-control" })
+                                </td>
+                                <td class="labelName">
+                                    State Code:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.DropDownListFor(model => Model.ReturnHeader.Business.USAddress.State, new SelectList(USStates, "value", "text", null), "Select Code", new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+
+                            <tr id="trOutsideCityStates">
+                                <td class="labelName">
+                                    City:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.City, new { @id = "ForeignPayerCity", maxlength = "22", @class = "form-control" })
+                                </td>
+                                <td class="labelName">
+                                    Foreign City/State:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.ProvinceOrStateNm, new { @id = "ForeignPayerCity", maxlength = "22", @class = "form-control" })
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="trzipcode">
+                                <td class="labelName">
+                                    Zip Code:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.USAddress.ZipCd, new { maxlength = "9", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="trZipcodeOutside">
+                                <td class="labelName">
+                                    Country:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.DropDownListFor(model => Model.ReturnHeader.Business.ForeignAddress.Country, new SelectList(countryList, "text", "value", null), "Select Code", new { @class = "form-control" })
+                                </td>
+                                <td class="labelName">
+                                    Postal Code:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.ForeignAddress.PostalCd, new { maxlength = "9", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Contact Name:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.ContactNm, new { @class = "form-control", maxlength = "50" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Phone Number:
+                                </td>
+                                <td class="apifieldname vaT" colspan="3">
+                                    @Html.TextBoxFor(m => Model.ReturnHeader.Business.Phone, new { @class = "form-control", maxlength = "10" })
+                                    @*@Html.TextBoxFor(m => m.ReturnHeader.Business.PhoneExtn, new { @tabindex = "114", @class = "PhoneExtension", maxlength = "5", @style = "width:60px !important;", @placeholder = "extn"})*@
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Email Address:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.Email, new { @class = "form-control" })
+                                </td>
+                                <td class="labelName">
+                                    Fax Number:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.Fax, new { @class = "form-control", maxlength = "10" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Signatory Name:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.SigningAuthority.Name, new { @class = "form-control", maxlength = "50" })
+                                </td>
+                                <td class="labelName">
+                                    Title:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.DropDownListFor(model => Model.ReturnHeader.Business.SigningAuthority.BusinessMemberType, Enum.GetValues(typeof(EstateBusinessMembers)).Cast<EstateBusinessMembers>().Select(x => new SelectListItem { Text = Utility.GetEnumDisplayName(x), Value = (x).ToString() }), "-- Select--", new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Daytime Phone:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.Business.SigningAuthority.Phone, new { @class = "form-control", maxlength = "10" })
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                    <h4 class="panel-title">
+                        Form 941 Aggregate Client Details
+                    </h4>
+                    <div id="collapse2" class="panel-collapse collapse">
+                        <div class="form_941 taR_input formDiv" id="tabs-0" style="padding:0px">
+                            <table id="DivsocialsecurityorMedicaretax" class="tdDisBlock640">
+
+                                <tr>
+                                    <td class="labelNameL">
+                                        <span class="red">*</span> Client's Record Id:
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.TextBoxFor(model => Model.ReturnData.Form941ClientDetails[0].CRecordId, new { @tabindex = "1", @datatip = "1029", @maxlength = "36" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL">
+                                        <span class="red">*</span> Client's Sequence Id:
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.TextBoxFor(model => Model.ReturnData.Form941ClientDetails[0].CSeqId, new { @tabindex = "1", @datatip = "1029", @maxlength = "36" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL">
+                                        <label>
+                                            <span class="red">*</span>1(a). Client's Business Name:
+                                        </label>
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.TextBoxFor(model => Model.ReturnData.Form941ClientDetails[0].ClientName, "", new { @tabindex = "1", @datatip = "1029" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL">
+                                        <label>
+                                            <span class="red">*</span>1(b).  Client's Employer Identification Number (EIN):
+                                        </label>
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.TextBoxFor(model => Model.ReturnData.Form941ClientDetails[0].ClientEIN, "", new { @tabindex = "1", @datatip = "1029", @class = "ClientEINDetails" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL">
+                                        <label>
+                                            2.   Type of wages, tips, and other compensation:
+                                        </label>
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.DropDownListFor(model => Model.ReturnData.Form941ClientDetails[0].WagesTypeCd, CPEOWageTypeList, "--Select--", new { @tabindex = "2" })
+                                        @*@Html.EnumDropDownListFor(model => model.Form941SchRRecords[0].ReturnData.Form941ClientDetails[i].CPEOWageType, "Select", new { @tabindex = "2" })*@
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL">
+                                        <label>
+                                            3.  Wages, tips, and other compensation allocated to this client:
+                                        </label>
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.TextBoxFor(model => Model.ReturnData.Form941ClientDetails[0].WagesAmt, new { @maxlength = "17", @tabindex = "3", @datatip = "1030" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL">
+                                        <label>
+                                            4.  Federal income tax withheld from wages, tips, and other compensation allocated to this client:
+                                        </label>
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.TextBoxFor(model => model.ReturnData.Form941ClientDetails[0].FedIncomeTaxWHAmt, new { @maxlength = "17", @tabindex = "4", @datatip = "1031" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL" id="tdZipCode">
+                                        5e. Total taxable wages & tips:
+                                    </td>
+                                    <td class="apifieldname vaT">
+                                        @Html.TextBoxFor(model => model.ReturnData.Form941ClientDetails[0].Line5e, new { maxlength = "17", @tabindex = "127" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL" id="tdZipCode">
+                                        5f. Section 3121(q) Notice and Demand—Tax due on unreported tips:
+                                    </td>
+                                    <td class="apifieldname vaT">
+                                        @Html.TextBoxFor(model => Model.ReturnData.Form941ClientDetails[0].TaxOnUnreportedTips3121qAmt, new { maxlength = "17", @tabindex = "130" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL">
+                                        <label>
+                                            11.Qualified small business payroll tax credit for increasing research activities:
+                                        </label>
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.TextBoxFor(model => Model.ReturnData.Form941ClientDetails[0].Line11, new { @tabindex = "14", maxlength = "17", @datatip = "1063" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL">
+                                        <label>
+                                            12. Total taxes due after adjustments:
+                                        </label>
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.TextBoxFor(model => Model.ReturnData.Form941ClientDetails[0].Line12, new { @tabindex = "14", maxlength = "17", @datatip = "1063" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"></td>
+                                </tr>
+                                <tr>
+                                    <td class="labelNameL">
+                                        <label>
+                                            13.Total deposits for this quarter, plus any payments made with the return allocated to this client:
+                                        </label>
+                                    </td>
+                                    <td class="apifieldname">
+                                        @Html.TextBoxFor(model => Model.ReturnData.Form941ClientDetails[0].TotTaxDepositAmt, new { @tabindex = "14", maxlength = "17", @datatip = "1063" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="spacer10"></td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                    <h4 class="panel-title">
+                        941SCHR Main Filer Data
+                    </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="responsive">
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    2. Total wages, tips, and other compensation:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnData.Form941MainFilerData.WagesAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    3. Total Federal Income Tax Withheld from wages, tips, and other compensation:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnData.Form941MainFilerData.FedIncomeTaxWHAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="">
+                    </div>
+                    <div>
+                        <table class="tdDisBlock640">
+                            <tr>
+                                <td class="labelNameL">
+                                    5e. Total taxable wages & tips:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnData.Form941MainFilerData.Line5e, new { maxlength = "17", @class = "form-control", id = "Line5eAmt" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    5f. Section 3121(q) Notice and Demand—Tax due on unreported tips:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnData.Form941MainFilerData.TaxOnUnreportedTips3121qAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    11. Qualified small business payroll tax credit for increasing research activities:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnData.Form941MainFilerData.Line11, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    12. Total taxes after adjustments and credits:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnData.Form941MainFilerData.Line12, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    13. Deposits for this quarter:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnData.Form941MainFilerData.TotTaxDepositAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="form_941 taR_input formDiv" id="tabs-1" style="padding:0px">
+
+                        <table class="tdDisBlock640">
+                            <tr>
+                                <td class="labelNameL">
+                                    Are you eligible for the Qualified Small Business Payroll Tax Credit for Increasing Research Activities?
+                                </td>
+                                <td class="fieldText vaT noWrap pLeft10">
+                                    <div class="field switch">
+                                        @Html.RadioButtonFor(model => Model.ReturnData.Form941MainFilerData.IsPayrollTaxCredit, true, new { id = "rdoIsPayrollCreditYes", @onchange = "OnIsPayrollTaxCreditMainFiler();", @class = "css-radiobox" })
+                                        <label for="rdoIsPayrollCreditYes" class="cb-disable"><span>Yes</span></label>
+                                        @Html.RadioButtonFor(model => Model.ReturnData.Form941MainFilerData.IsPayrollTaxCredit, false, new { id = "rdoIsPayrollCreditNo", @onchange = "OnIsPayrollTaxCreditMainFiler();", @checked = true, @class = "css-radiobox" })
+                                        <label for="rdoIsPayrollCreditNo" class="cb-enable"><span>No</span></label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table class="PayrollTaxCreditFormDiv_MainFiler tblsty table-bordered cf dataTable minInputSize" style="display:none">
+                            <thead>
+                                <tr>
+                                    <th style="max-width:50px">
+                                        S.No
+                                    </th>
+                                    <th style="min-width:160px">
+                                        (a) Ending date of income tax period
+                                    </th>
+                                    <th>
+                                        (b) Income tax return filed that included Form 6765
+                                    </th>
+                                    <th style="min-width:160px">
+                                        (c) Date income tax return was filed
+                                    </th>
+                                    <th style="min-width:110px">
+                                        (d) EIN used on Form 6765
+                                    </th>
+                                    <th>
+                                        (e) Amount from Form 6765, line 44, or if applicable, the amount that was allocated to your EIN
+                                    </th>
+                                    <th>
+                                        (f) Amount of credit from column (e) taken on a previous period(s)
+                                    </th>
+                                    <th>
+                                        (g) Remaining credit
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int sNo = 1;
+                                    int i = 0;
+                                    var form8974ITRDetails = Model.ReturnData != null && Model.ReturnData.Form941MainFilerData != null &&
+                                        Model.ReturnData.Form941MainFilerData.Form8974 != null && Model.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails != null ? Model.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails : null;
+                                }
+                                @if (form8974ITRDetails != null)
+                                {
+                                    for (int client = 0; client < form8974ITRDetails.Count; client++)
+                                    {
+                                        i++;
+                                        <tr>
+                                            <td class="pos-rel">
+                                                @(sNo++)
+                                                @*  @Html.HiddenFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].Form8974IncomeTaxId)*@
+                                            </td>
+                                            <td class="pos-rel">
+                                                @Html.EditorFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].IncomeTaxPeriodEndDate, new { @id = "IncomeTaxPeriodEndDate_" + i, @class = "form-control" })
+                                            </td>
+                                            <td class="pos-rel">
+                                                @Html.DropDownListFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].IncomeTaxReturnFiledForm, form8974, "--Select--", new { @id = "IncomeTaxReturnFiledForm_" + i, @class = "ITRFiledForm" })
+                                            </td>
+                                            <td class="pos-rel">
+                                                @Html.EditorFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].IncomeTaxReturnFiledDate, new { @id = "IncomeTaxReturnFiledDate_" + i })
+                                            </td>
+                                            <td class="pos-rel">
+                                                @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].Form6765EIN, new { @id = "Form6765EIN_" + i })
+                                            </td>
+                                            <td class="pos-rel">
+                                                @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].Form6765Line44Amt, new { @id = "Form6765Line44Amt_" + i, @maxlength = "17", @onfocus = "txtFocus(this)", @onblur = "txtBlur(this)" })
+                                            </td>
+                                            <td class="pos-rel">
+                                                @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].PreviousPeriodRemaingCreditAmt, new { @id = "PreviousPeriodRemaingCreditAmt_" + i, @maxlength = "17", @onfocus = "txtFocus(this)", @onblur = "txtBlur(this)" })
+                                            </td>
+                                            <td class="pos-rel">
+                                                @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Form8974IncomeTaxDetails[client].RemainingCredit, new { @id = "RemainingCredit_" + i, @maxlength = "17", @onfocus = "txtFocus(this)", @onblur = "txtBlur(this)" })
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                        <div class="PayrollTaxCreditFormDiv_MainFiler" style="display:none">
+                            <div class="spacer20 full_width"></div>
+                            <div class="searchTitle">Determine the credit that you can use this period.</div>
+                            <div class="form_box">
+                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                                    <label>7. Total payroll tax credit you have available for the current tax year</label>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 check_box_941 taR doller_input">
+                                    @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Line7, new { @id = "Line7", @class = "Line7" })
+                                </div>
+                            </div>
+                            <div class="spacer20 full_width"></div>
+                            <div class="form_box">
+                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                                    <label>
+                                        8. Taxable social security wages (Form 941, Line 5a Column 2)
+                                    </label>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 check_box_941 taR doller_input">
+                                    @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Line8, new { @class = "Line8" })
+                                </div>
+                            </div>
+                            <div class="spacer20 full_width"></div>
+                            <div class="form_box">
+                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                                    <label>9. Taxable social security tips (Form 941, Line 5b Column 2)</label>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 check_box_941 taR doller_input">
+                                    @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Line9, new { @class = "Line9" })
+                                </div>
+                            </div>
+                            <div class="spacer20 full_width"></div>
+                            <div class="form_box">
+                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                                    <label>10. Total social security tax</label>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 check_box_941 taR doller_input">
+                                    @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Line10, new { @class = "Line10" })
+                                </div>
+                            </div>
+                            <div class="spacer20 full_width"></div>
+                            <div class="form_box">
+                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                                    <label>11. Employer's social security tax (50% of total security tax) </label>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 check_box_941 taR doller_input">
+                                    @Html.TextBoxFor(model => model.ReturnData.Form941MainFilerData.Form8974.Line11, new { @class = "Line11" })
+                                </div>
+                            </div>
+                            <div class="spacer20 full_width"></div>
+                            <div class="form_box">
+
+                                <div class="spacer20 full_width">
+                                    @Html.RadioButtonFor(x => x.ReturnData.Form941MainFilerData.Form8974.PayerIndicatorType, Form8974PayerIndicatorType.THIRDPARTYSICKPAYIND.ToString(), new { @id = "checkIsThirdparty_MainFiler", @class = "css-radiobox" })
+                                    <label for="checkIsThirdparty_MainFiler" class="cb-enable"><span>I'm a third-party payer of sick pay</span></label>
+                                    @Html.RadioButtonFor(x => x.ReturnData.Form941MainFilerData.Form8974.PayerIndicatorType, Form8974PayerIndicatorType.SECTION3121QIND.ToString(), new { @id = "checkIsreceived3121_MainFiler", @class = "css-radiobox" })
+                                    <label for="checkIsreceived3121_MainFiler" class="cb-disable"><span>I received a Section 3121(q) Notice and Demand</span></label>
+                                    <a href="javascript:void(0)" class="buttonC floatR mTop10-sm" onclick="RadioClearMainFiler();">Clear</a>
+                                </div>
+
+                            </div>
+                            <div class="spacer20 full_width"></div>
+                            <div class="form_box">
+                                <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                                    <label>12. Credit (Qualified small business payroll tax credit for increasing research activities)</label>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 check_box_941 doller_input taR">
+                                    @Html.TextBoxFor(x => x.ReturnData.Form941MainFilerData.Form8974.Line12, new { @class = "Line12" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                    <h4 class="panel-title">
+                        Form941 Aggregate Data
+                    </h4>
+                </div>
+
+                <div id="collapse4" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="responsive">
+                            <tr>
+                                <td class="labelNameL">
+                                    1. Total number of employees who received wages, tips, or other compensation for the pay period including Mar. 12 (Jan - Mar 2017):
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.EmployeeCnt, new { @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    2. Total wages, tips, and other compensation:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.WagesAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    3. Total Federal Income Tax Withheld from wages, tips, and other compensation:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.FedIncomeTaxWHAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="">
+                        <table class="tdDisBlock640">
+                            <tr>
+                                <td class="labelNameL">
+                                    4. Do you have wages, tips, or other compensation which are subject to social security or Medicare tax?
+                                </td>
+                                <td class="fieldText vaT noWrap">
+                                    <div class="field switch">
+                                        @Html.RadioButtonFor(model => model.ReturnData.AggregateForm941Data.WagesNotSubjToSSMedcrTaxInd, true, new { id = "rdoIsWagesYes", @checked = true, @onchange = "OnWagesOptionChoose();", @class = "css-radiobox" })
+                                        <label for="rdoIsWagesYes" class="cb-disable"><span>Yes</span></label>
+                                        @Html.RadioButtonFor(model => model.ReturnData.AggregateForm941Data.WagesNotSubjToSSMedcrTaxInd, false, new { id = "rdoIsWagesNo", @onchange = "OnWagesOptionChoose();", @class = "css-radiobox" })
+                                        <label for="rdoIsWagesNo" class="cb-enable"><span>No</span></label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                        </table>
+                        <table id="DivsocialsecurityorMedicaretax" class="tdDisBlock640" style="display:none">
+                            <tr>
+                                <td class="labelNameL tdCountry">5a. Taxable social security wages:</td>
+                                <td class="apifieldname vaT tdCountry">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5aInitialAmt, new { maxlength = "17", @class = "form-control", id = "Line5aAmt" })
+                                    <div class="cPart">
+                                        <span class="calcPart">x 0.124 =</span>
+                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5a, new { maxlength = "17", @class = "form-control", id = "Line5a_col2_Amt" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    5b. Taxable social security tips:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5bInitialAmt, new { maxlength = "17", @class = "form-control", id = "Line5bAmt" })
+                                    <div class="cPart">
+                                        <span class="calcPart">x 0.124 =</span>
+                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5b, new { maxlength = "17", @class = "form-control", id = "Line5b_col2_Amt" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    5c. Taxable Medicare wages & tips:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5cInitialAmt, new { maxlength = "17", @class = "form-control", id = "Line5cAmt" })
+                                    <div class="cPart">
+                                        <span class="calcPart">x 0.029 =</span>
+                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5c, new { maxlength = "17", @class = "form-control", id = "Line5c_col2_Amt" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    5d. Taxable wages & tips subject to Additional Medicare Tax withholdings:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5dInitialAmt, new { maxlength = "17", @class = "form-control", id = "Line5dAmt" })
+                                    <div class="cPart">
+                                        <span class="calcPart">x 0.009 =</span>
+                                        @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5d, new { maxlength = "17", @class = "form-control", id = "Line5d_col2_Amt" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    5e. Total taxable wages & tips:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line5e, new { maxlength = "17", @class = "form-control", id = "Line5eAmt" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <table class="tdDisBlock640">
+                            <tr>
+                                <td class="labelNameL">
+                                    5f. Section 3121(q) Notice and Demand—Tax due on unreported tips:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.TaxOnUnreportedTips3121qAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    6. Total taxes before adjustments:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line6, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    7. Adjustments for Fraction of Cents:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.CurrentQtrFractionsCentsAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    8. Adjustment for sick pay:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.CurrentQuarterSickPaymentAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    9. Adjustments for tips and group-term life insurance:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.CurrQtrTipGrpTermLifeInsAdjAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    10. Total taxes after adjustments:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line10, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    11. Qualified small business payroll tax credit for increasing research activities:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line11, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    12. Total taxes after adjustments and credits:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line12, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    13. Deposits for this quarter:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.TotTaxDepositAmt, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    14. Balance due:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line14, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelNameL">
+                                    15. Overpayment:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => model.ReturnData.AggregateForm941Data.Line15, new { maxlength = "17", @class = "form-control" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="fieldText vaT noWrap pLeft10">
+                                    <div class="field switch">
+                                        <div class="floatL mBot10">
+                                            @Html.RadioButtonFor(model => model.ReturnData.AggregateForm941Data.FilerType, FilerType.SECTION3504AGENT.ToString(), new { @id = "SECTION3504AGENT", @checked = true, @class = "css-radiobox" })
+                                            <label for="SECTION3504AGENT" class="cb-enable"><span>SECTION 3504 AGENT</span></label>
+                                        </div>
+                                        <div class="floatL mBot10">
+                                            @Html.RadioButtonFor(model => model.ReturnData.AggregateForm941Data.FilerType, FilerType.CPEO.ToString(), new { @id = "CPEO", @class = "css-radiobox" })
+                                            <label for="CPEO" class="cb-disable"><span>CPEO</span></label>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+                    <h4 class="panel-title">
+                        Business Status
+                    </h4>
+                </div>
+
+                <div id="collapse5" class="panel-collapse collapse panel-body">
+
+                    <label class="in_check floatL unCheckDiv" for="chkBusinessClosed">
+                        @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.IsBusinessClosed, new { @id = "chkBusinessClosed", @class = "css-checkbox divCheckBox", @onchange = "OnBusinessClosed();" })
+                        <label for="chkBusinessClosed" class="css-label mBot0">My business closed OR stopped paying wages</label>
+                    </label>
+                    <div class="white_bg full_width mBot10" id="BusinessClosedDiv" style="display:none">
+                        <table class="responsive">
+                            <tr>
+                                <td class="labelName">
+                                    Final date you paid wages:
+                                </td>
+                                <td class="pLeft10">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.FinalDateWagesPaid, new { @tabindex = "155", @style = "text-align: left !important;", @id = "BSFinaldatewagespaid", @placeholder = "Ex. mm/dd/yyyy", @class = "date-icon" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName" style="text-align:left;">
+                                    <b>Record Keeper Details</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="labelName" colspan="4" style="text-align:left;">
+                                    Enter the name of the person keeping the payroll records and the address where those records will be kept.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Name:
+                                </td>
+                                <td class="pLeft10">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.Name, new { @tabindex = "156", id = "txtBSName" })
+                                </td>
+                            <tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <div class="full_width">
+                                        @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.IsForeign, new { onclick = "ChangeForeignAddress();", @class = "css-checkbox", id = "checkIsForeignAddress", @tabindex = "157" })
+                                        <label for="checkIsForeignAddress" class="css-label checkbox">Foreign Address (Outside US)?</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Address:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.Address1, new { @tabindex = "158", @class = "ClosedForeignAddress" })
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.USAddress.Address1, new { @tabindex = "158", @class = "ClosedUSAddress" })
+                                </td>
+                                <td class="labelName">
+                                    Address Cont:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.Address2, new { @tabindex = "158", @class = "ClosedForeignAddress" })
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.USAddress.Address2, new { @tabindex = "159", @class = "ClosedUSAddress" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="bscitystate">
+                                <td class="labelName">
+                                    City:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @*@Html.TextBoxFor(model => Model.Form941SchRRecords[0].ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.City, new { @id = "EmployerCity", maxlength = "22", @tabindex = "160",@class = "ClosedForeignAddress" })*@
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.USAddress.City, new { @id = "EmployerCity", maxlength = "22", @class = "ClosedUSAddress" })
+
+                                </td>
+                                <td class="labelName">
+                                    State Code:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.DropDownListFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.USAddress.State, new SelectList(USStates, "text", "value", null), "Select Code", new { @class = "ClosedUSAddress" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="bsOutsideCityStates">
+                                <td class="labelName">
+                                    Foreign City/State:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.City, new { @id = "ForeignEmployerCity", maxlength = "22", @class = "ClosedForeignAddress" })
+                                </td>
+                                <td class="labelName">
+                                    Country:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.DropDownListFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.Country, new SelectList(countryList, "text", "value", null), "Select Code", new { @class = "ClosedForeignAddress" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="bszipcode">
+                                <td class="labelName">
+                                    Zip Code:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.USAddress.ZipCd, new { maxlength = "9", @tabindex = "164" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="bsZipcodeOutside">
+                                <td class="labelName">
+                                    Postal Code:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessClosedDetails.ForeignAddress.PostalCd, new { maxlength = "9", @tabindex = "165" })
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <label class="in_check  floatL unCheckDiv" for="chkBusinessTransferred">
+                        @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.IsBusinessTransferred, new { @id = "chkBusinessTransferred", @class = "css-checkbox divCheckBox", @onchange = "OnBusinessTransferred();" })
+                        <label for="chkBusinessTransferred" class="css-label mBot0">My business was sold OR transferred</label>
+                    </label>
+                    <div class="white_bg full_width mBot10" style="display:none" id="BusinessTransferredDiv">
+                        <table class="responsive">
+                            <tr>
+                                <td class="labelName">
+                                    Business Change Type:
+                                </td>
+                                <td class="fieldText vaT noWrap pLeft10">
+                                    <div class="field switch">
+                                        @Html.RadioButtonFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.IsSale, true, new { id = "rdoIsSale", @onchange = "ShowHideCalYr();" })
+                                        <label for="rdoIsSale" class="cb-disable"><span>Sale</span></label>
+                                        @Html.RadioButtonFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.IsSale, false, new { id = "rdoIsTransfer", @onchange = "ShowHideCalYr();", @checked = true })
+                                        <label for="rdoIsTransfer" class="cb-enable"><span>Transfer</span></label>
+                                    </div>
+                                </td>
+                                <td class="pLeft10" id="trSaleCalYear">
+                                    <label class="pLeft10" id="lblTransferType"></label>
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.DateOfChange, new { @tabindex = "169", @style = "text-align: left !important;", @id = "BSDateOfChange", @placeholder = "Ex. mm/dd/yyyy", @class = "date-icon" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Business Type:
+                                </td>
+                                <td class="fieldText vaT noWrap pLeft10">
+                                    @Html.DropDownListFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.NewBusinessType, BusinessTypeList, "-- Select--",
+                       new { @tabindex = "170", id = "BusinessType", @onchange = "AssignBusinessMembers();" })
+                                </td>
+                                <td class="labelName">
+                                    Business Name:
+                                </td>
+                                <td class="fieldText vaT noWrap pLeft10">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.NewBusinessName, new { @tabindex = "171", id = "txtBSName" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName" style="text-align:left;">
+                                    <b>Record Keeper Details</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="labelName" colspan="4" style="text-align:left;">
+                                    Enter the name of the person keeping the payroll records and the address where those records will be kept.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Name:
+                                </td>
+                                <td class="pLeft10">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.Name, new { @tabindex = "172", id = "txtBSName" })
+                                </td>
+                            <tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <div class="full_width">
+                                        @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.IsForeign, new { onclick = "ChangeForeignAddress();", @class = "css-checkbox", id = "checkIsTranForeignAddress", @tabindex = "173" })
+                                        <label for="checkIsTranForeignAddress" class="css-label checkbox">Foreign Address (Outside US)?</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="labelName">
+                                    Address:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.USAddress.Address1, new { @tabindex = "174", @class = "ChangeUSForeignAddress" })
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.ForeignAddress.Address1, new { @tabindex = "174", @class = "ChangeForeignAddress" })
+                                </td>
+                                <td class="labelName">
+                                    Address Cont:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.USAddress.Address2, new { @tabindex = "175", @class = "ChangeUSForeignAddress" })
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.ForeignAddress.Address2, new { @tabindex = "174", @class = "ChangeForeignAddress" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="trancitystate">
+                                <td class="labelName">
+                                    City:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @*@Html.TextBoxFor(model => Model.Form941SchRRecords[0].ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.USAddress.City, new { @id = "EmployerCity", maxlength = "22", @tabindex = "176" })*@
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.USAddress.City, new { @id = "EmployerCity", maxlength = "22", @tabindex = "176" })
+                                </td>
+                                <td class="labelName">
+                                    State Code:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.DropDownListFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.USAddress.State, new SelectList(USStates, "text", "value", null), "Select Code", new { @tabindex = "177" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="tranOutsideCityStates">
+                                <td class="labelName">
+                                    Foreign City/State:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @*@Html.TextBoxFor(model => Model.Form941SchRRecords[0].ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.ForeignAddress.City, new { @id = "ForeignEmployerCity", maxlength = "22", @tabindex = "178" })*@
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.ForeignAddress.City, new { @id = "ForeignEmployerCity", maxlength = "22", @tabindex = "178" })
+                                </td>
+                                <td class="labelName">
+                                    Country:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.DropDownListFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.ForeignAddress.Country, new SelectList(countryList, "text", "value", null), "Select Code", new { @tabindex = "179" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="tranzipcode">
+                                <td class="labelName">
+                                    Zip Code:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.USAddress.ZipCd, new { maxlength = "9", @tabindex = "180" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spacer10"></td>
+                            </tr>
+                            <tr id="tranZipcodeOutside">
+                                <td class="labelName">
+                                    Postal Code:
+                                </td>
+                                <td class="apifieldname vaT">
+                                    @Html.TextBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.BusinessTransferredDetails.ForeignAddress.PostalCd, new { maxlength = "9", @tabindex = "181" })
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <label class="in_check floatL unCheckDiv " for="chkSeasonalEmployer">
+                        @Html.CheckBoxFor(model => Model.ReturnHeader.BusinessStatusDetails.IsSeasonalEmployer, new { @id = "chkSeasonalEmployer", @class = "css-checkbox divCheckBox", @tabindex = "182" })
+                        <label for="chkSeasonalEmployer" class="css-label mBot0">I am a Seasonal Employer and do not have to file a return for every quarter of the year</label>
+                    </label>
+
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div data-toggle="collapse" class="panel-heading" data-parent="#accordion" href="#collapse7">
+                    <h4 class="panel-title">
+                        Deposit Schedule & Tax Liability
+                    </h4>
+                </div>
+                <div id="collapse7" class="panel-collapse collapse">
+                    <table>
+                        <tr>
+                            <td class="fieldText vaT pLeft10">
+                                <div class="field switch">
+                                    <div class="floatL w100p mBot10">
+                                        @Html.RadioButtonFor(model => model.ReturnData.DepositScheduleType.DepositorType, DepositorScheduleType.MINTAXLIABILITY.ToString(), new { @id = "mintaxliability", @onchange = "OnIsMonthlyDepositor();", @checked = true, @class = "css-radiobox" })
+                                        <label for="mintaxliability" class="cb-enable"><span>Total taxes after adjustments and credits on this return is, or prior quarter was, less than $2,500.</span></label>
+                                    </div>
+                                </div>
+                                <div class="field switch">
+                                    <div class="floatL w100p mBot10">
+                                        @Html.RadioButtonFor(model => model.ReturnData.DepositScheduleType.DepositorType, DepositorScheduleType.MONTHLY.ToString(), new { @id = "monthly", @onchange = "OnIsMonthlyDepositor();", @class = "css-radiobox" })
+                                        <label for="monthly" class="cb-disable"><span>Monthly schedule depositor for the entire quarter.</span></label>
+                                    </div>
+                                </div>
+                                <div class="white_bg full_width mBot10" style="display:none;min-height:auto;" id="MonthlyDepositor">
+                                    <div class="monthly-div">
+                                        <table class="responsive">
+                                            <tr>
+                                                <td class="labelName">
+                                                    Tax Liability Month1:
+                                                </td>
+                                                <td class="apifieldname vaT">
+                                                    @Html.TextBoxFor(model => model.ReturnData.DepositScheduleType.MonthlyDepositor.TaxLiabilityMonth1, new { @class = "form-control", maxlength = "50", id = "TaxLiabilityMonth1" })
+                                                </td>
+                                                <td class="labelName">
+                                                    Tax Liability Month2:
+                                                </td>
+                                                <td class="apifieldname vaT">
+                                                    @Html.TextBoxFor(model => model.ReturnData.DepositScheduleType.MonthlyDepositor.TaxLiabilityMonth2, new { @class = "form-control", maxlength = "50", id = "TaxLiabilityMonth2" })
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" class="spacer10"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="labelName">
+                                                    Tax Liability Month3:
+                                                </td>
+                                                <td class="apifieldname vaT">
+                                                    @Html.TextBoxFor(model => model.ReturnData.DepositScheduleType.MonthlyDepositor.TaxLiabilityMonth3, new { @class = "form-control", maxlength = "50", id = "TaxLiabilityMonth3" })
+                                                </td>
+                                                <td colspan="2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" class="spacer10"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="labelName">
+                                                    Total liability for quarter:
+                                                </td>
+                                                <td class="apifieldname vaT">
+                                                    @Html.TextBoxFor(model => model.ReturnData.DepositScheduleType.TaxLiabilityTotalAmt, new { @class = "form-control", maxlength = "50", id = "MonthlyTotalTaxLiabilityAmt" })
+                                                </td>
+                                                <td colspan="2"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="field switch mBot10">
+                                    <div class="floatL w100p">
+                                        @Html.RadioButtonFor(model => model.ReturnData.DepositScheduleType.DepositorType, DepositorScheduleType.SEMIWEEKLY.ToString(), new { @id = "semiweekly", @onchange = "OnIsMonthlyDepositor();", @class = "css-radiobox" })
+                                        <label for="semiweekly" class="cb-disable"><span>Semiweekly schedule depositor for any part of this quarter.</span></label>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div id="SemiweeklyDepositor" class="monthly-div white_bg full_width">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fieldText vaT noWrap pLeft10">
+                                <div class="field switch">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fieldText vaT noWrap pLeft10">
+                                <div class="field switch">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="panel panel-default">
+                <div data-toggle="collapse" class="panel-heading collapsed" data-parent="#accordion" href="#collapse8">
+                    <h4 class="panel-title">
+                        Third Party Designee
+                    </h4>
+                </div>
+
+                <div id="collapse8" class="panel-collapse collapse">
+                    <table>
+                        <tr>
+                            <td class="labelNameL">
+                                Do you want to allow another person to discuss this return with IRS?
+                            </td>
+                            <td class="fieldText vaT noWrap pLeft10">
+                                <div class="field switch">
+                                    @*@Html.RadioButtonFor(model => Model.ReturnHeader.IsThirdPartyDesignee, new { @id = "rdoIsThirdPartyYes", @class = "css-radiobox" })*@
+                                    @Html.RadioButtonFor(model => model.ReturnHeader.IsThirdPartyDesignee, false, new { @id = "rdoIsThirdPartyYes", @class = "css-radiobox", @onchange = "OnIsThirdPartyDesignee()" })
+                                    <label for="rdoIsThirdPartyYes" class="cb-disable"><span>Yes</span></label>
+                                    @Html.RadioButtonFor(model => model.ReturnHeader.IsThirdPartyDesignee, true, new { @id = "rdoIsThirdPartyNo", @class = "css-radiobox", @onchange = "OnIsThirdPartyDesignee()", @checked = true })
+                                    <label for="rdoIsThirdPartyNo" class="cb-enable"><span>No</span></label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="display:none;" id="ThirdPartyDesignee" class="tdDisBlock640">
+                        <tr>
+                            <td class="labelName">
+                                Designee Name:
+                            </td>
+                            <td class="apifieldname vaT">
+                                @Html.TextBoxFor(model => Model.ReturnHeader.ThirdPartyDesignee.Name, new { @class = "form-control", maxlength = "50" })
+                            </td>
+                            <td class="labelName">
+                                Designee Phone:
+                            </td>
+                            <td class="apifieldname vaT">
+                                @Html.TextBoxFor(model => Model.ReturnHeader.ThirdPartyDesignee.Phone, new { @class = "form-control", maxlength = "10" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="spacer10"></td>
+                        </tr>
+                        <tr>
+                            <td class="labelName">
+                                Enter any 5 digit PIN:
+
+                            </td>
+                            <td class="apifieldname vaT">
+                                @Html.TextBoxFor(model => Model.ReturnHeader.ThirdPartyDesignee.PIN, new { @class = "form-control", maxlength = "5" })
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse9">
+                    <h4 class="panel-title">
+                        Signature Details
+                    </h4>
+                </div>
+                <div id="collapse9" class="panel-collapse collapse">
+                    <table>
+                        <tr>
+                            <td colspan="2" class="fieldText vaT noWrap pLeft10">
+                                <div class="field switch">
+                                    <div class="floatL mBot10">
+                                        @Html.RadioButtonFor(model => model.ReturnHeader.SignatureDetails.SignatureType, SignatureType.ONLINE_SIGN_PIN.ToString(), new { @id = "onlinepin", @checked = true, @onchange = "OnIsOnlineSignaturePIN();", @class = "css-radiobox" })
+                                        <label for="onlinepin" class="cb-enable"><span>Online Signature PIN</span></label>
+                                    </div>
+                                    <div class="floatL mBot10">
+                                        @Html.RadioButtonFor(model => model.ReturnHeader.SignatureDetails.SignatureType, SignatureType.REPORTING_AGENT.ToString(), new { @id = "rapin", @onchange = "OnIsOnlineSignaturePIN();", @class = "css-radiobox" })
+                                        <label for="rapin" class="cb-disable"><span>Reporting Agent</span></label>
+                                    </div>
+                                    <div class="floatL">
+                                        @Html.RadioButtonFor(model => model.ReturnHeader.SignatureDetails.SignatureType, SignatureType.FORM_8453_EMP.ToString(), new { @id = "form8453", @onchange = "OnIsOnlineSignaturePIN();", @class = "css-radiobox" })
+                                        <label for="form8453" class="cb-disable"><span>FORM 8453</span></label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr id="OnlineSignaturePINDiv" style="display:none">
+                            <td class="labelName">
+                                PIN:
+                            </td>
+                            <td class="apifieldname vaT">
+                                @Html.TextBoxFor(model => model.ReturnHeader.SignatureDetails.OnlineSignaturePIN.PIN, new { @class = "form-control", maxlength = "10" })
+                            </td>
+                        </tr>
+                        <tr id="RAPINDiv" style="display:none">
+                            <td class="labelName">
+                                PIN:
+                            </td>
+                            <td class="apifieldname vaT">
+                                @Html.TextBoxFor(model => model.ReturnHeader.SignatureDetails.ReportingAgentPIN.PIN, new { @class = "form-control", maxlength = "10" })
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+                                    }
+
+    <div class="spacer10"></div>
+    <div class="taC">
+        <button type="button" class="btn btn_lg btn_primary" onclick="GetStatus()" id="btnCreate">
+            Create Return
+            <i class="fa fa-spinner fa-spin" aria-hidden="true" id="CreateSpinner" style="display:none"></i>
+        </button>
+    </div>
+
+</div>
+
+
+
+<script>
+    function OnIsOnlineSignaturePIN() {
+        if ($("#onlinepin").is(':checked')) {
+            $("#OnlineSignaturePINDiv").show();
+            $("#RAPINDiv").hide();
+        }
+        else if ($("#rapin").is(':checked')) {
+            $("#OnlineSignaturePINDiv").hide();
+            $("#RAPINDiv").show();
+        }
+        else {
+            $("#OnlineSignaturePINDiv").hide();
+            $("#RAPINDiv").hide();
+        }
+    }
+
+    $(function () {
+        OnWagesOptionChoose();
+
+        $('#Line5aAmt').trigger("blur");
+        $('#Line5bAmt').trigger("blur");
+        $('#Line5cAmt').trigger("blur");
+        $('#Line5dAmt').trigger("blur");
+
+        $(".modal-dialogLg").addClass("modal-dialogXL");
+        // $('#OnlineSignatureDate').datepicker({ 'format': 'mm/dd/yyyy', 'autoclose': true, 'defaultDate': null });
+        // OnIsThirdPartyDesignee();
+        OnIsOnlineSignaturePIN();
+        OnIsMonthlyDepositor();
+        $('input[id*=IncomeTaxPeriodEndDate]').each(function () {
+            $(this).datepicker({ 'format': 'mm/dd/yyyy', 'autoclose': true, 'defaultDate': null });
+            $(this).attr('readonly', 'readonly');
+        })
+
+        $('input[id*=IncomeTaxReturnFiledDate]').each(function () {
+            $(this).datepicker({ 'format': 'mm/dd/yyyy', 'autoclose': true, 'defaultDate': null });
+            $(this).attr('readonly', 'readonly');
+        })
+
+        $('input[id*=Form6765EIN]').each(function () {
+            $(this).mask("999999999");
+        })
+
+        //$('#BSFinaldatewagespaid').datepicker({ 'format': 'mm/dd/yyyy', 'autoclose': true, 'defaultDate': null });
+        //$('#BSDateOfChange').datepicker({ 'format': 'mm/dd/yyyy', 'autoclose': true, 'defaultDate': null });
+        $("#bsOutsideCityStates").hide();
+        $("#bsZipcodeOutside").hide();
+        $("#tranOutsideCityStates").hide();
+        $("#tranZipcodeOutside").hide();
+        OnBusinessClosed();
+        OnBusinessTransferred();
+        ChangeForeignAddress();
+        ShowHideCalYr();
+
+
+    })
+
+
+
+    function showHideCalenderYear() {
+
+        if ($("#rdoCalenderYear").is(":checked")) {
+            $("#trcalenderYear").show()
+            $("#trFiscalYear").hide();
+
+        }
+        else if ($("#rdoFiscalYear").is(":checked")) {
+            $("#trcalenderYear").hide()
+            $("#trFiscalYear").show();
+
+        }
+    }
+
+    function GetStatus() {
+        var formdata = $("#CreateForm941SCHR").serialize();
+        $("#btnCreate > i").show();
+        $("#btnCreate").prop("disabled", true);
+        $.ajax({
+            url: "/Form941SCHR/APIResponseStatus/",
+            cache: false,
+            type: 'POST',
+            data: formdata,
+            success: function (data) {
+                $(".modal-dialog").addClass("edit-dialog");
+                $('#ModelBody').html(data);
+                $('#myModal').modal("show");
+                $("#btnCreate > i").hide();
+                $("#btnCreate").prop("disabled", false);
+            },
+            error: function (err) {
+                console.log(err.responseText);
+                $("#btnCreate > i").hide();
+                $("#btnCreate").prop("disabled", false);
+            }
+        });
+    }
+
+
+    function AssignITReturnForms() {
+        if ($("#IsITReturnForm1040").is(':checked')) {
+            $("#ReturnData_Form941_Form8974_IsITReturnForm1040").val(true);
+        }
+        else {
+            $("#ReturnData_Form941_Form8974_IsITReturnForm1040").val(false);
+        }
+
+        if ($("#IsITReturnForm1065").is(':checked')) {
+            $("#ReturnData_Form941_Form8974_IsITReturnForm1065").val(true);
+        }
+        else {
+            $("#ReturnData_Form941_Form8974_IsITReturnForm1065").val(false);
+        }
+
+        if ($("#IsITReturnForm1120").is(':checked')) {
+            $("#ReturnData_Form941_Form8974_IsITReturnForm1120").val(true);
+        }
+        else {
+            $("#ReturnData_Form941_Form8974_IsITReturnForm1120").val(false);
+        }
+
+        if ($("#IsITReturnForm1120F").is(':checked')) {
+            $("#ReturnData_Form941_Form8974_IsITReturnForm1120F").val(true);
+        }
+        else {
+            $("#ReturnData_Form941_Form8974_IsITReturnForm1120F").val(false);
+        }
+
+        if ($("#IsITReturnForm1120S").is(':checked')) {
+            $("#ReturnData_Form941_Form8974_IsITReturnForm1120S").val(true);
+        }
+        else {
+            $("#ReturnData_Form941_Form8974_IsITReturnForm1120S").val(false);
+        }
+    }
+
+    function OnIsPayrollTaxCreditMainFiler() {
+        $('.PayrollTaxCreditFormDiv_MainFiler').toggle()
+    }
+
+    function ChangeSignatureType(obj) {
+        if ($(obj).val() == 'ONLINE_SIGN_PIN') {
+            $("#trOnlineReportingPin").show();
+            $("#trReportingAgentPin").hide();
+        } else if ($(obj).val() == 'REPORTING_AGENT') {
+            $("#trOnlineReportingPin").hide();
+            $("#trReportingAgentPin").show();
+        } else if ($(obj).val() == 'FORM_8453_EMP') {
+            $("#trOnlineReportingPin").hide();
+            $("#trReportingAgentPin").hide();
+        }
+    }
+    function OnWagesOptionChoose() {
+        if ($("#rdoIsWagesYes").is(':checked')) {
+            $("#DivsocialsecurityorMedicaretax").show();
+        }
+        else {
+            $("#DivsocialsecurityorMedicaretax").hide();
+        }
+    }
+    $('#Line5aAmt').focus(function () {
+        var B1 = $('#Line5aAmt').val();
+        if (B1 > 0) {
+        }
+        else {
+            $('#Line5aAmt').val("");
+        }
+
+    });
+
+    $('#Line5bAmt').focus(function () {
+        var B1 = $('#Line5bAmt').val();
+        if (B1 > 0) {
+        }
+        else {
+            $('#Line5bAmt').val("");
+        }
+    });
+
+    $('#Line5cAmt').focus(function () {
+        var B1 = $('#Line5cAmt').val();
+        if (B1 > 0) {
+        }
+        else {
+            $('#Line5cAmt').val("");
+        }
+    });
+
+    $('#Line5dAmt').focus(function () {
+        var B1 = $('#Line5dAmt').val();
+        if (B1 > 0) {
+        }
+        else {
+            $('#Line5dAmt').val("");
+        }
+    });
+
+    $('#Line5aAmt').blur(function () {
+        var amt = (this.value) == "" ? 0.00 : parseFloat(this.value);
+        if (amt > 0) {
+            $('#lblLine5a').text('$' + totalaAmt.toFixed(2));
+        }
+        else {
+            $('#Line5aAmt').val("0.00");
+            $('#lblLine5a').text("$0.00");
+        }
+
+    });
+
+    $('#Line5bAmt').blur(function () {
+        var amt = (this.value) == "" ? 0.00 : parseFloat(this.value);
+        if (amt > 0) {
+            $('#lblLine5b').text('$' + totalaAmt.toFixed(2));
+        }
+        else {
+            $('#Line5bAmt').val("0.00");
+            $('#lblLine5b').text("$0.00");
+        }
+    });
+
+    $('#Line5cAmt').blur(function () {
+        var amt = (this.value) == "" ? 0.00 : parseFloat(this.value);
+        if (amt > 0) {
+            $('#lblLine5c').text('$' + totalaAmt.toFixed(2));
+        }
+        else {
+            $('#Line5cAmt').val("0.00");
+            $('#lblLine5c').text("$0.00");
+        }
+    });
+
+    $('#Line5dAmt').blur(function () {
+        var amt = (this.value) == "" ? 0.00 : parseFloat(this.value);
+        if (amt > 0) {
+            //$('#Line5dAmt').val(amt.toFixed(2));
+            var totalaAmt = parseFloat($('#Line5dAmt').val()) * 0.009;
+            $('#lblLine5d').text('$' + totalaAmt.toFixed(2));
+        }
+        else {
+            $('#Line5dAmt').val("0.00");
+            $('#lblLine5d').text("$0.00");
+        }
+    });
+
+
+    function OnIsPayrollTaxCredit(id) {
+        var classId = '.PayrollTaxCreditFormDiv_' + id
+        $(classId).toggle();
+    }
+
+    function txtFocus(element) {
+        if ($(element).val() == null && $(element).val() == undefined && $(element).val() == '') {
+            $(element).val('0.00')
+        }
+        if (parseFloat($(element).val()) == '0.00') {
+            $(element).val('')
+        }
+    }
+
+    function txtBlur(element) {
+
+        if ($(element).val() == null || $(element).val() == undefined || $(element).val() == '') {
+            $(element).val('0.00')
+        }
+        else {
+            $(element).val(parseFloat($(element).val()).toFixed(2))
+        }
+    }
+    function RadioClearCreateCl(id) {
+        $("#checkIsreceived3121Client_" + id).prop('checked', false);
+        $("#checkIsThirdpartyClient_" + id).prop('checked', false);
+    }
+
+    function OnIsMonthlyDepositor() {
+        if ($("#monthly").is(':checked')) {
+            $("#MonthlyDepositor").show();
+        }
+        else {
+            $("#TaxLiabilityMonth1").val("");
+            $("#TaxLiabilityMonth2").val("");
+            $("#TaxLiabilityMonth3").val("");
+            $("#MonthlyTotalTaxLiabilityAmt").val("");
+            $("#MonthlyDepositor").hide();
+        }
+
+        if ($("#semiweekly").is(':checked')) {
+            $.ajax({
+                url: "/Form941SCHR/_SemiweeklyDepositor941SchR/",
+                cache: false,
+                type: "GET",
+                success: function (data) {
+                    $("#SemiweeklyDepositor").html(data);
+                    $("#SemiweeklyDepositor").show();
+                },
+                error: function (err) {
+                    console.log(err.responseText);
+                }
+            });
+
+        }
+        else {
+            $("#SemiweeklyDepositor").html("");
+            $("#SemiweeklyDepositor").hide();
+        }
+    }
+
+    function OnIsOnlineSignaturePIN() {
+        if ($("#onlinepin").is(':checked')) {
+            $("#OnlineSignaturePINDiv").show();
+            $("#RAPINDiv").hide();
+        }
+        else if ($("#rapin").is(':checked')) {
+            $("#OnlineSignaturePINDiv").hide();
+            $("#RAPINDiv").show();
+        }
+        else {
+            $("#OnlineSignaturePINDiv").hide();
+            $("#RAPINDiv").hide();
+        }
+    }
+
+    function OnIsThirdPartyDesignee() {
+
+        $("#rdoIsThirdPartyYes").click(function () {
+
+            $("#rdoIsThirdPartyYes").attr('checked', true);
+        })
+        if ($("#rdoIsThirdPartyYes").is(':checked')) {
+            $("#ThirdPartyDesignee").show();
+        }
+        else {
+            $("#ThirdPartyDesignee").hide();
+        }
+    }
+
+    function OnIsMonthlyDepositor() {
+        if ($("#monthly").is(':checked')) {
+            $("#MonthlyDepositor").show();
+        }
+        else {
+            $("#TaxLiabilityMonth1").val("");
+            $("#TaxLiabilityMonth2").val("");
+            $("#TaxLiabilityMonth3").val("");
+            $("#MonthlyTotalTaxLiabilityAmt").val("");
+            $("#MonthlyDepositor").hide();
+        }
+
+    }
+
+
+    $(".divCheckBox").change(function () {
+        $(".CheckDiv").removeClass(".CheckDiv")
+        if ($(this).is(':checked')) {
+            $(this).parent().addClass("CheckDiv")
+        }
+        else if ($(this).is(':unchecked')) {
+            $(this).parent().removeClass("CheckDiv")
+        }
+    });
+
+    function ChangeForeignAddress() {
+        if ($("#checkIsForeignAddress").is(":checked")) {
+            $('#bscitystate').hide();
+            $("#bszipcode").hide();
+            $("#bsOutsideCityStates").show();
+            $("#bsZipcodeOutside").show();
+            $('.ClosedForeignAddress').show();
+            $('.ClosedUSAddress').hide();
+
+        }
+        else if ($("#checkIsTranForeignAddress").is(":checked")) {
+            $('#trancitystate').hide();
+            $("#tranzipcode").hide();
+            $("#tranOutsideCityStates").show();
+            $("#tranZipcodeOutside").show();
+            $('.ChangeUSForeignAddress').hide();
+            $('.ChangeForeignAddress').show();
+
+        }
+        else {
+            $("#bsOutsideCityStates").hide();
+            $("#bsZipcodeOutside").hide();
+            $("#bszipcode").show();
+            $("#bscitystate").show();
+            $("#tranOutsideCityStates").hide();
+            $("#tranZipcodeOutside").hide();
+            $("#tranzipcode").show();
+            $("#trancitystate").show();
+            $('.ClosedForeignAddress').hide();
+            $('.ChangeForeignAddress').hide();
+            $('.ChangeUSForeignAddress').show();
+            $('.ClosedUSAddress').show();
+        }
+    }
+
+    function OnBusinessClosed() {
+        if ($("#chkBusinessClosed").is(':checked')) {
+            $("#BusinessClosedDiv").show();
+        }
+        else {
+            $("#BusinessClosedDiv").hide();
+        }
+    }
+
+    function OnBusinessTransferred() {
+        if ($("#chkBusinessTransferred").is(':checked')) {
+            $("#BusinessTransferredDiv").show();
+        }
+        else {
+            $("#BusinessTransferredDiv").hide();
+        }
+    }
+
+    function ShowHideCalYr() {
+        if ($("#rdoIsSale").is(":checked")) {
+            $("#lblTransferType").html('');
+            $("#lblTransferType").html('Date of Sale');
+            $("#trSaleCalYear").show();
+        }
+        else if ($("#rdoIsTransfer").is(":checked")) {
+            $("#lblTransferType").html('');
+            $("#lblTransferType").html('Date of Transfer:');
+            $("#trSaleCalYear").show();
+        }
+    }
+
+    function AssignBusinessMembers() {
+        var selectOption = "<option>--Select--</option>";
+        if ($("#BusinessType").val() != "") {
+            var BusinessType = $("#BusinessType").val();
+            $.getJSON("/Form941/BusinessMembersList/", { id: BusinessType }, function (data) {
+                if (data != null && data != '' && data != undefined) {
+                    $("#BusinessMembers").html("");
+                    $("#BusinessMembers").append(selectOption);
+                    $.each(data, function (key, value) {
+                        $("#BusinessMembers").append(
+                            $('<option></option>').val(value).html(value));
+
+                    });
+                }
+            });
+        }
+        else {
+            $("#BusinessMembers").html("");
+            $("#BusinessMembers").append(selectOption);
+        }
+    }
+
+
+
+
+</script>

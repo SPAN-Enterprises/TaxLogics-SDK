@@ -1,0 +1,173 @@
+﻿@model APIClientTool.ViewModels.FormW2ReturnResponse
+<div class="modal-header edit-modal-header">
+    <button type="button" class="close" data-dismiss="modal"></button>
+    <h4 id="form_heading" class="modal-title">
+        Reponse Status
+    </h4>
+</div>
+<div class="modal-body edit-modal-body white_bg">
+    @if (Model != null && Model.StatusCode > 0)
+    {
+        <table class="responsive">
+            <tr>
+                <td class="labelName"><label class="control-label">SubmissionId:</label></td>
+                <td class="fieldName">@Model.SubmissionId</td>
+            </tr>
+            <tr><td class="spacer10"></td></tr>
+            <tr>
+                <td class="labelName"><label class="control-label">Status Code:</label></td>
+                <td class="fieldName">@Model.StatusCode</td>
+            </tr>
+            <tr><td class="spacer10"></td></tr>
+            <tr>
+                <td class="labelName"><label class="control-label">Status Message:</label></td>
+                <td class="fieldName">@Model.StatusMessage</td>
+            </tr>
+            <tr><td class="spacer10"></td></tr>
+            <tr>
+                <td class="labelName"><label class="control-label">Status Name:</label></td>
+                <td class="fieldName">@Model.StatusName</td>
+            </tr>
+        </table>
+    }
+
+    @if (Model != null && Model.FormW2Records != null && Model.FormW2Records.ErrorRecords != null && Model.FormW2Records.ErrorRecords.Count > 0)
+    {
+        <div class="spacer15"> </div>
+        <h3 style="font-size:medium;font-weight:600">Error Records</h3>
+        <div>
+            <table class="table table-bordered">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>
+                            Sequence
+                        </th>
+                        <th>
+                            Error
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.FormW2Records.ErrorRecords)
+                {
+                        <tr>
+                            <td>@item.Sequence</td>
+                            <td>
+                                <table class="table table-bordered">
+                                    <thead class="thead-inverse">
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Name</th>
+                                            <th>Message</th>
+                                            <th>Type</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var itemerror in item.Errors)
+                                        {
+                                            <tr>
+                                                <td>@itemerror.Code</td>
+                                                <td>@itemerror.Name</td>
+                                                <td>@itemerror.Message</td>
+                                                <td>@itemerror.Type</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+
+    @if (Model != null && Model.FormW2Records != null && Model.FormW2Records.SuccessRecords != null)
+            {
+        <div class="spacer15"> </div>
+        <h3 style="font-size:medium;font-weight:600">Success Records</h3>
+        <div>
+            <table class="table table-bordered">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>Sequence</th>
+                        <th>Record Id</th>
+                        <th>Record Status</th>
+                        <th>Date Created On</th>
+                        <th>Date Updated On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.FormW2Records.SuccessRecords)
+                    {
+                        <tr>
+                            <td>@item.Sequence</td>
+                            <td>@item.RecordId</td>
+                            <td>@item.RecordStatus</td>
+                            <td>@item.CreatedTs</td>
+                            <td>@item.UpdatedTs</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+    @if (Model != null && Model.Errors != null)
+    {
+        <h3 style="font-size:medium;font-weight:600">Error Records</h3>
+        <div class="spacer15"> </div>
+        <table class="table table-bordered">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Message</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var itemerror in Model.Errors)
+                {
+                    <tr>
+                        <td>@itemerror.Code</td>
+                        <td>@itemerror.Name</td>
+                        <td>@itemerror.Message</td>
+                        <td>@itemerror.Type</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+
+    @*@if (!string.IsNullOrWhiteSpace(ViewBag.ReasonPhrase))
+        {
+            <table class="responsive">
+                <tr>
+                    <div class="taC">
+                        <label class="control-label">@ViewBag.ReasonPhrase</label>
+                    </div>
+                </tr>
+            </table>
+        }*@
+
+</div>
+
+<div class="modal-footer edit-modal-footer mTopNo">
+    <div class="taC">
+        <button type="button" class="btn btn_md btn_second" data-dismiss="modal">
+            Okay
+        </button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+
+
+    })
+</script>
+

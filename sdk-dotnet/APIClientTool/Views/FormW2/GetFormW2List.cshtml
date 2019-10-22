@@ -1,0 +1,199 @@
+﻿@model APIClientTool.ViewModels.FormW2ListRequest
+@{
+    List<SelectListItem> _ReturnStatus = new List<SelectListItem>();
+    _ReturnStatus.Add(new SelectListItem { Text = "PROCESSING", Value = "PROCESSING" });
+    _ReturnStatus.Add(new SelectListItem { Text = "CREATED", Value = "CREATED" });
+    _ReturnStatus.Add(new SelectListItem { Text = "ACCEPTED", Value = "ACCEPTED" });
+    _ReturnStatus.Add(new SelectListItem { Text = "REJECTED", Value = "REJECTED" });
+
+    List<SelectListItem> _PageSize = new List<SelectListItem>();
+    _PageSize.Add(new SelectListItem { Text = "10", Value = "10" });
+    _PageSize.Add(new SelectListItem { Text = "25", Value = "25" });
+    _PageSize.Add(new SelectListItem { Text = "50", Value = "50" });
+    _PageSize.Add(new SelectListItem { Text = "100", Value = "100" });
+}
+<style>
+    .labelName {
+        font-weight: 600;
+        text-align: right;
+        padding-right: 5px;
+        color: #212121;
+        width: 200px;
+        vertical-align: top;
+        padding-top: 8px;
+        font-size: 14px;
+    }
+
+    .formDiv input[type="text"], input[type="text"], input[type="password"], select, textarea, select.form-control {
+        width: 192px;
+    }
+
+        input[type="text"], input[type="password"], select, textarea, select.form-control {
+            color: #454545;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 15px;
+            /* margin-bottom: 10px; */
+            padding-left: 25px;
+            border-radius: 0;
+            border: 1px solid #cdcdcd;
+            box-sizing: border-box;
+            font-size: 14px;
+            outline: medium none;
+            padding: 6px;
+            -webkit-transition: border-color 0.3s ease 0s;
+            -moz-transition: border-color 0.3s ease 0s;
+            -ms-transition: border-color 0.3s ease 0s;
+            transition: border-color 0.3s ease 0s;
+        }
+</style>
+<div class="body-content container" style="margin: auto;
+    width: 600px;    border: 1px solid #ddd;">
+
+    @*<div class="modal-header edit-modal-header">
+            <button type="button" class="close" data-dismiss="modal"></button>
+            <span class="modal-title edit-title ">Form W2 List</span>
+        </div>*@
+    <div><span class="pageTitle">Form W2 List</span></div>
+    <div class="">
+        @using (Html.BeginForm("", "", FormMethod.Post, new { id = "GetReturnList" }))
+        {
+            <div class="minBox">
+                <div id="form_heading">@ViewBag.Title</div>
+                <table class="responsive" style="display:block;padding:15px;">
+                    <tr>
+                        <td class="labelName">
+                            EIN:
+                        </td>
+                        <td class="fieldset vaT payer_field" style="width: 400px;">
+                            @Html.TextBoxFor(m => m.Ein, new { tabindex = "1" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spacer10"></td>
+                    </tr>
+                    <tr>
+                        <td class="labelName">
+                            Business Id:
+                        </td>
+                        <td class="fieldset vaT payer_field" style="width: 400px;">
+                            @Html.TextBoxFor(m => m.BusinessId, new { tabindex = "1" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spacer10"></td>
+                    </tr>
+                    <tr>
+                        <td class="labelName">
+                            Page:
+                        </td>
+                        <td class="fieldset vaT payer_field" style="width: 400px;">
+                            @Html.TextBoxFor(m => m.Page, new { tabindex = "2" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spacer10"></td>
+                    </tr>
+                    <tr>
+                        <td class="labelName">
+                            Page Size:
+                        </td>
+                        <td class="fieldset vaT payer_field" style="width: 400px;">
+                            @Html.DropDownListFor(m => m.PageSize, new SelectList(_PageSize, "text", "value", null), "Page Size", new { tabindex = "3" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spacer10"></td>
+                    </tr>
+                    <tr>
+                        <td class="labelName">
+                            Efile Status:
+                        </td>
+                        <td class="fieldset vaT payer_field" style="width: 400px;">
+                            @Html.DropDownListFor(m => m.EfileStatus, new SelectList(_ReturnStatus, "text", "value", null), "Status", new { tabindex = "4" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spacer10"></td>
+                    </tr>
+                    <tr>
+                        <td class="labelName">
+                            From Date:
+                        </td>
+                        <td class="fieldset vaT payer_field" style="width: 400px;">
+                            @Html.TextBoxFor(m => m.CreatedDateFrom, new { @Class = "date-icon", @placeholder = "Ex. mm/dd/yyyy", tabindex = "5" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="spacer10"></td>
+                    </tr>
+                    <tr>
+                        <td class="labelName">
+                            To Date:
+                        </td>
+                        <td class="fieldset vaT payer_field" style="width: 400px;">
+                            @Html.TextBoxFor(m => m.CreatedDateTo, new { @Class = "date-icon", @placeholder = "Ex. mm/dd/yyyy", tabindex = "6" })
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        }
+    </div>
+
+    @*<div class="modal-footer edit-modal-footer mTopNo">
+            <div class="taC">
+                <button type="button" class="btn_second" onclick="GenerateJSONForGetReturnList();"> Get List</button>
+            </div>
+        </div>*@
+    <div class="spacer10"></div>
+    <div class="taC">
+        <button type="button" class="btn_second" onclick="GenerateJSONForGetReturnList();">
+            Get List
+            <i class="fa fa-spinner fa-spin" aria-hidden="true" id="CreateSpinner" style="display:none"></i>
+        </button>
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#BusinessId').val("");
+        $('#CreatedDateFrom').datepicker({ 'format': 'mm/dd/yyyy', 'autoclose': true, 'defaultDate': null });
+        $('#CreatedDateTo').datepicker({ 'format': 'mm/dd/yyyy', 'autoclose': true, 'defaultDate': null });
+    });
+
+    function GenerateJSONForGetReturnList() {
+        $("#CreateSpinner").show();
+        var page = 0;
+        var pageSize = 0;
+        if ($('#Page').val() > 0 && $('#Page').val() != null && $('#Page').val() != undefined && $('#Page').val() != "") {
+            page = $('#Page').val();
+        }
+        if ($('#PageSize').val() > 0 && $('#PageSize').val() != null && $('#PageSize').val() != undefined && $('#PageSize').val() != "") {
+            pageSize = $('#PageSize').val();
+        }
+        $.ajax({
+            url: "/FormW2/_ListFormW2/",
+            cache: false,
+            //data: $("#GetReturnList").serialize(),
+            data: {
+                id: $('#BusinessId').val(),
+                Ein: $('#Ein').val(),
+                Page: page,
+                PageSize: pageSize,
+                ES: $('#EfileStatus').val(),
+                FD: $('#CreatedDateFrom').val(),
+                TD: $('#CreatedDateTo').val()
+            },
+            success: function (data) {
+                if (data != null) {
+                    $(".modal-dialog").addClass("edit-dialog");
+                    $('#ModelBody').html(data);
+                    $('#myModal').modal("show");
+                    $("#CreateSpinner").hide();
+                }
+            },
+            error: function (err) {
+                console.log(err.responseText);
+            }
+        });
+    }
+</script>
